@@ -163,94 +163,9 @@
   footer li{margin-bottom:6px;word-break:break-all}
 
 
-  /* ---------- Market (demo) ---------- */
-  :root{--up:#03a66d;--up-soft:rgba(3,166,109,.12);--down:#cf304a;--down-soft:rgba(207,48,74,.12)}
-  :root[data-theme="dark"]{--up:#0ecb81;--up-soft:rgba(14,203,129,.12);--down:#f6465d;--down-soft:rgba(246,70,93,.12)}
-  .up{color:var(--up)} .down{color:var(--down)}
-  .demo-banner{display:flex;gap:10px;align-items:flex-start;background:var(--warn-soft);color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);border-radius:8px;padding:12px 16px;font-size:14px;margin-bottom:18px}
-  .demo-banner b{white-space:nowrap}
-  .mkt{display:grid;gap:4px;width:min(1480px,calc(100vw - 32px));margin-left:calc(50% - min(740px,calc(50vw - 16px)));grid-template-columns:300px minmax(0,1fr) 320px;grid-template-areas:"tick tick tick" "book chart trades" "book form trades";background:var(--bg)}
-  .panel{background:var(--surface);border-radius:8px;min-width:0;overflow:hidden}
-  .panel-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
-  .tick{grid-area:tick;display:flex;flex-wrap:wrap;align-items:center;gap:10px 28px;padding:12px 18px}
-  .pair{display:flex;align-items:center;gap:12px}
-  .coin{width:32px;height:32px;color:var(--brand);background:none;display:grid;place-items:center}
-  .coin svg{width:32px;height:32px}
-  .pair b{font-size:18px;letter-spacing:-.01em;display:block;line-height:1.2}
-  .pair small{color:var(--muted);font-size:12px}
-  .last b{font-size:22px;font-weight:600;color:var(--up);letter-spacing:-.02em;display:block;line-height:1.2}
-  .last small{color:var(--muted);font-size:12px}
-  .tstat small{display:block;color:var(--muted);font-size:12px;line-height:1.4}
-  .tstat span{font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}
-  .chart{grid-area:chart;display:flex;flex-direction:column}
-  .tfs{display:flex;gap:2px}
-  .tfs button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:600;padding:5px 9px;border-radius:8px;cursor:pointer}
-  .tfs button:hover{color:var(--text);background:var(--surface-2)}
-  .tfs button[aria-pressed="true"]{color:var(--text);background:var(--surface-2)}
-  .chart-info{display:flex;flex-wrap:wrap;gap:4px 14px;padding:10px 16px 0;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;min-height:28px}
-  .chart-info b{font-weight:600;color:var(--text)}
-  .chart-info .ma7{color:#f0b90b}.chart-info .ma25{color:#eb40b5}
-  .cv-wrap{position:relative;flex:1;min-height:420px}
-  .cv-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair}
-  .book{grid-area:book;display:flex;flex-direction:column}
-  .trades{grid-area:trades}
-  .ob-head,.ob-row,.tr-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:0 16px;font-size:12px;font-variant-numeric:tabular-nums}
-  .ob-head{color:var(--muted);padding-top:10px;padding-bottom:6px}
-  .ob-head span:nth-child(n+2),.ob-row span:nth-child(n+2),.tr-row span:nth-child(n+2){text-align:right}
-  .ob-row{position:relative;line-height:22px}
-  .ob-row i{position:absolute;right:0;top:1px;bottom:1px;z-index:0;transition:width .4s}
-  .ob-row span{position:relative;z-index:1}
-  .asks .ob-row i{background:var(--down-soft)} .bids .ob-row i{background:var(--up-soft)}
-  .asks .ob-row span:first-child{color:var(--down)} .bids .ob-row span:first-child{color:var(--up)}
-  .mid{display:flex;align-items:baseline;gap:10px;padding:8px 16px;margin:4px 0}
-  .mid b{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
-  .mid small{color:var(--muted);font-size:12px}
-  .tr-list{overflow:hidden;padding-bottom:8px}
-  .tr-row{line-height:22px}
-  .tr-row.flash{animation:flash 1s ease}
-  @keyframes flash{from{background:var(--accent-soft)}to{background:transparent}}
-  .form{grid-area:form}
-  .ftabs{display:flex;gap:18px}
-  .ftabs button{border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:var(--muted);padding:0 0 2px;cursor:pointer;border-bottom:2px solid transparent}
-  .ftabs button[aria-pressed="true"]{color:var(--text);border-color:var(--btn)}
-  .fcols{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:16px}
-  .fcol{display:grid;gap:10px}
-  .avbl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
-  .avbl b{color:var(--text);font-weight:600}
-  .field{display:flex;align-items:center;border:1px solid var(--line-strong);background:transparent;border-radius:8px;padding:0 12px;height:42px;transition:border-color .2s}
-  .field:focus-within{border-color:var(--btn)}
-  .field label{font-size:13px;color:var(--muted);white-space:nowrap}
-  .field input{flex:1;min-width:0;border:0;background:transparent;color:var(--text);font:inherit;font-size:14px;font-weight:600;text-align:right;padding:0 8px;outline:none;font-variant-numeric:tabular-nums}
-  .field input:disabled{color:var(--muted)}
-  .field em{font-style:normal;font-size:13px;color:var(--muted)}
-  .pct{width:100%;accent-color:var(--text)}
-  .pct-marks{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:-6px}
-  .btn{height:42px;border:0;border-radius:8px;font:inherit;font-weight:600;font-size:15px;color:#fff;cursor:pointer;transition:filter .2s,transform .1s}
-  .btn:hover{filter:brightness(1.08)} .btn:active{transform:scale(.99)}
-  .btn.buy{background:var(--up)} .btn.sell{background:var(--down)}
-  .orders{border-top:1px solid var(--line);padding:14px 16px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;background:var(--text);color:var(--bg);padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:var(--shadow-hover);transition:all .3s;z-index:50;pointer-events:none;max-width:calc(100% - 32px);text-align:center}
-  .toast.show{opacity:1;transform:translate(-50%,0)}
-  .book .obtools{display:flex;gap:6px}
-  .obtools button{width:24px;height:24px;border:0;border-radius:4px;background:transparent;cursor:pointer;display:grid;place-items:center;opacity:.55}
-  .obtools button[aria-pressed="true"]{opacity:1;background:var(--surface-2)}
-  .obtools svg{width:16px;height:16px}
-  .book.only-bids .asks,.book.only-asks .bids{display:none}
-  .ttabs{display:flex;gap:16px}
-  .ttabs button{border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:var(--muted);padding:0 0 2px;cursor:pointer;border-bottom:2px solid transparent}
-  .ttabs button[aria-pressed="true"]{color:var(--text);border-color:var(--btn)}
-  .empty{padding:48px 16px;text-align:center;color:var(--muted);font-size:13px}
-  .vol-label{position:absolute;left:12px;font-size:11px;color:var(--muted);pointer-events:none}
-  @media (max-width:1200px){
-    .mkt{grid-template-columns:minmax(0,1fr) 300px;grid-template-areas:"tick tick" "chart book" "form book" "trades trades"}
-    .tr-list{max-height:360px}
-  }
-  @media (max-width:900px){
-    .mkt{grid-template-columns:1fr;grid-template-areas:"tick" "chart" "book" "form" "trades"}
-    .cv-wrap{min-height:340px}
-  }
-  @media (max-width:560px){.fcols{grid-template-columns:1fr}.tick{gap:12px 20px}}
-
+  ul.plain{margin:6px 0 0;padding-left:18px;color:var(--muted);font-size:15px}
+  ul.plain li{margin-bottom:6px}
+  .card .badge{margin-top:14px}
   .reveal{opacity:0;transition:opacity .4s ease}
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
@@ -289,11 +204,11 @@
   <div class="hero">
     <span class="eyebrow" data-i18n="hero.eyebrow">Singapore Certification Readiness</span>
     <h1 data-i18n="hero.title"><span class="grad">MST Network</span> — Platform Features &amp; Singapore Certification Plan</h1>
-    <p class="lead" data-i18n="hero.lead">A single reference for what the MUSTSEM (MST) network offers today, which Singapore national certifications and regulatory recognitions it will pursue, and what must be prepared before applying.</p>
+    <p class="lead" data-i18n="hero.lead">A single reference for what the MUSTSEM (MST) network offers today and how it will be certified in Singapore — starting with the minimal scope: MST as a network-fee utility token, proven through small-scale pilots.</p>
     <div class="meta">
       <span data-i18n="hero.owner">Owner: MUSTSEM (머스트셈)</span>
       <span data-i18n="hero.updated">Last updated: 22 Oct 2026</span>
-      <span data-i18n="hero.status">Status: Mainnet live · Pre-certification</span>
+      <span data-i18n="hero.status">Status: Mainnet live · Stage 1 preparation</span>
     </div>
     <div class="stats">
       <div class="stat"><b>7601</b><span data-i18n="stat.chain">Chain ID</span></div>
@@ -308,10 +223,13 @@
 <div class="toc-bar"><div class="wrap">
   <nav class="toc" aria-label="Contents">
     <a href="#summary" data-i18n="nav.summary">Summary</a>
+    <a href="#approach" data-i18n="nav.approach">Approach</a>
+    <a href="#utility" data-i18n="nav.utility">Token utility</a>
     <a href="#network" data-i18n="nav.network">Network</a>
-    <a href="#market" data-i18n="nav.market">Market</a>
     <a href="#features" data-i18n="nav.features">Features</a>
     <a href="#security" data-i18n="nav.security">Security</a>
+    <a href="#pilots" data-i18n="nav.pilots">Pilots</a>
+    <a href="#risks" data-i18n="nav.risks">Risks</a>
     <a href="#tracks" data-i18n="nav.tracks">Certification tracks</a>
     <a href="#readiness" data-i18n="nav.readiness">Readiness checklist</a>
     <a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a>
@@ -332,16 +250,52 @@
       <p style="margin:0" data-i18n="sum.callout"><strong>Important:</strong> Singapore does not issue a single “blockchain certificate” for a chain. National-level recognition is built from a stack of government-backed schemes: cybersecurity certification by the Cyber Security Agency (CSA), data protection certification by IMDA, alignment with IMDA’s TradeTrust / OpenAttestation verifiable-document framework, and — most critically for MST — a clear regulatory position from the Monetary Authority of Singapore (MAS) on how MST, wMST and tokenised assets are classified.</p>
     </div>
     <div class="grid g3" style="margin-top:16px">
-      <div class="card reveal"><span class="tag" data-i18n="sum.c1t">Regulation</span><h3 data-i18n="sum.c1h">MAS position</h3><p data-i18n="sum.c1p">MST is used as collateral, staked for rewards and bridged. A Singapore legal opinion on its classification comes first.</p></div>
+      <div class="card reveal"><span class="tag" data-i18n="sum.c1t">Regulation</span><h3 data-i18n="sum.c1h">MAS position</h3><p data-i18n="sum.c1p">Stage 1 positions MST as a network-fee and API-usage utility token. A Singapore legal opinion confirming that scope comes first.</p></div>
       <div class="card reveal"><span class="tag" data-i18n="sum.c2t">Security</span><h3 data-i18n="sum.c2h">CSA Cyber Trust mark</h3><p data-i18n="sum.c2p">National cybersecurity certification (SS 712:2025). Our Vault / HSM / AES-256-GCM architecture is a strong starting point.</p></div>
       <div class="card reveal"><span class="tag" data-i18n="sum.c3t">Data</span><h3 data-i18n="sum.c3h">IMDA DPTM</h3><p data-i18n="sum.c3p">Data Protection Trustmark (SS 714:2025). Applies because the platform runs sign-up, dashboard and consultation forms.</p></div>
       <div class="card reveal"><span class="tag" data-i18n="sum.c4t">Interoperability</span><h3 data-i18n="sum.c4h">TradeTrust alignment</h3><p data-i18n="sum.c4p">Make SBT credentials and RWA records verifiable in Singapore’s OpenAttestation format.</p></div>
     </div>
   </section>
 
+
+  <!-- APPROACH -->
+  <section id="approach">
+    <span class="kicker">02</span>
+    <h2 data-i18n="ap.h">Staged certification approach</h2>
+    <p class="sub" data-i18n="ap.sub">We start with the narrowest scope that can be certified and build an operating record before expanding. Each stage has its own requirements.</p>
+    <div class="grid g3">
+      <div class="card reveal"><span class="tag" data-i18n="ap.s1t">Stage 1 · Now</span><h3 data-i18n="ap.s1h">Network-fee utility</h3><p data-i18n="ap.s1p">MST is used to pay gas and API-usage fees on the MST network. Small-scale pilots run within the MAS sandbox at standard payment institution (SPI) scale.</p></div>
+      <div class="card reveal"><span class="tag" data-i18n="ap.s2t">Stage 2</span><h3 data-i18n="ap.s2h">Operating track record</h3><p data-i18n="ap.s2p">Pilot results, on-chain activity and security certifications form the evidence base. Services expand only where the legal position is confirmed.</p></div>
+      <div class="card reveal"><span class="tag" data-i18n="ap.s3t">Stage 3 · Later</span><h3 data-i18n="ap.s3h">Regulated services, if pursued</h3><p data-i18n="ap.s3p">Any service that falls under payment-services or capital-markets rules — such as tokenised assets with ownership rights — is offered only after the matching MAS licence.</p></div>
+    </div>
+  </section>
+
+  <!-- TOKEN UTILITY -->
+  <section id="utility">
+    <span class="kicker">03</span>
+    <h2 data-i18n="ut.h">MST token utility (Stage 1 scope)</h2>
+    <p class="sub" data-i18n="ut.sub">How MST is used on the network during Stage 1, and the boundaries we keep to stay within that scope.</p>
+    <div class="grid g2">
+      <div class="card reveal"><h3 data-i18n="ut.inh">Used for</h3>
+        <ul class="plain">
+          <li data-i18n="ut.in1">Gas fees for transactions on chain 7601</li>
+          <li data-i18n="ut.in2">API-usage fees for token issuance and smart-contract calls</li>
+          <li data-i18n="ut.in3">Collateral for dedicated enterprise networks (native coin issued 1:1000, fully backed)</li>
+          <li data-i18n="ut.in4">Rewards for network participation such as mining (in development)</li>
+        </ul></div>
+      <div class="card reveal"><h3 data-i18n="ut.outh">Not part of Stage 1</h3>
+        <ul class="plain">
+          <li data-i18n="ut.out1">No dividends, profit sharing or ownership rights attached to MST</li>
+          <li data-i18n="ut.out2">No exchange, brokerage or trading service for MST on this platform</li>
+          <li data-i18n="ut.out3">No public sale or investment marketing of MST</li>
+          <li data-i18n="ut.out4">No retail staking or lending offered in or from Singapore before legal confirmation</li>
+        </ul></div>
+    </div>
+  </section>
+
   <!-- 2 NETWORK -->
   <section id="network">
-    <span class="kicker">02</span>
+    <span class="kicker">04</span>
     <h2 data-i18n="net.h">Network at a glance</h2>
     <p class="sub" data-i18n="net.sub">MST is the main chain. Enterprise networks are issued on top of it, backed by MST collateral.</p>
     <div class="tbl-wrap">
@@ -373,87 +327,9 @@
     </div>
   </section>
 
-  <!-- MARKET (DEMO) -->
-  <section id="market">
-    <span class="kicker">03</span>
-    <h2 data-i18n="mk.h">MST Market</h2>
-    <p class="sub" data-i18n="mk.sub">Price chart, order book and order entry for MST against the Korean won.</p>
-    <div class="demo-banner" role="note"><b data-i18n="mk.demo">Demo</b><span data-i18n="mk.demotxt">Simulated data for interface preview. MST is not listed or tradable on this page, the reference price is fixed at ₩1,000, and orders cannot be placed.</span></div>
-
-    <div class="mkt">
-      <div class="panel tick">
-        <div class="pair"><span class="coin"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3.5 34.3 11.75v16.5L20 36.5 5.7 28.25v-16.5Z" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/><path d="M13.2 27V13.6l6.8 8.2 6.8-8.2V27" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>MST/KRW</b><small>Mustsem · Chain 7601</small></div></div>
-        <div class="last"><b id="lastPx">1,000</b><small>≈ ₩1,000.00</small></div>
-        <div class="tstat"><small data-i18n="mk.chg">24h change</small><span id="chg">0.00 (0.00%)</span></div>
-        <div class="tstat"><small data-i18n="mk.high">24h high</small><span id="hi">—</span></div>
-        <div class="tstat"><small data-i18n="mk.low">24h low</small><span id="lo">—</span></div>
-        <div class="tstat"><small data-i18n="mk.volm">24h volume (MST)</small><span id="volM">—</span></div>
-        <div class="tstat"><small data-i18n="mk.volk">24h volume (KRW)</small><span id="volK">—</span></div>
-      </div>
-
-      <div class="panel chart">
-        <div class="panel-h"><div class="ttabs"><button type="button" aria-pressed="true" data-i18n="mk.chart">Chart</button></div>
-          <div class="tfs" id="tfs" role="group" aria-label="Timeframe">
-            <button type="button" data-tf="1m">1m</button><button type="button" data-tf="15m">15m</button><button type="button" data-tf="1H" aria-pressed="true">1H</button><button type="button" data-tf="4H">4H</button><button type="button" data-tf="1D">1D</button>
-          </div>
-        </div>
-        <div class="chart-info" id="chartInfo"></div>
-        <div class="cv-wrap"><span class="vol-label" id="volLabel">Vol(MST)</span><canvas id="cv" aria-label="MST/KRW candlestick chart"></canvas></div>
-      </div>
-
-      <div class="panel book">
-        <div class="panel-h"><span data-i18n="mk.book">Order book</span>
-          <div class="obtools" id="obtools" role="group" aria-label="Order book view">
-            <button type="button" data-v="both" aria-pressed="true" title="Bids &amp; asks"><svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="#f6465d"/><rect x="1" y="9" width="6" height="6" fill="#0ecb81"/><rect x="9" y="2" width="6" height="1.6" fill="currentColor"/><rect x="9" y="5" width="6" height="1.6" fill="currentColor"/><rect x="9" y="9.5" width="6" height="1.6" fill="currentColor"/><rect x="9" y="12.5" width="6" height="1.6" fill="currentColor"/></svg></button>
-            <button type="button" data-v="bids" aria-pressed="false" title="Bids only"><svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="14" fill="#0ecb81"/><rect x="9" y="2" width="6" height="1.6" fill="currentColor"/><rect x="9" y="7" width="6" height="1.6" fill="currentColor"/><rect x="9" y="12" width="6" height="1.6" fill="currentColor"/></svg></button>
-            <button type="button" data-v="asks" aria-pressed="false" title="Asks only"><svg viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="14" fill="#f6465d"/><rect x="9" y="2" width="6" height="1.6" fill="currentColor"/><rect x="9" y="7" width="6" height="1.6" fill="currentColor"/><rect x="9" y="12" width="6" height="1.6" fill="currentColor"/></svg></button>
-          </div>
-        </div>
-        <div class="ob-head"><span data-i18n="mk.px">Price (KRW)</span><span data-i18n="mk.amt">Amount (MST)</span><span data-i18n="mk.tot">Total (KRW)</span></div>
-        <div class="asks" id="asks"></div>
-        <div class="mid"><b class="up" id="midPx">1,000 ↑</b><small>₩1,000.00</small></div>
-        <div class="bids" id="bids"></div>
-      </div>
-
-      <div class="panel form">
-        <div class="panel-h">
-          <div class="ftabs" id="ftabs"><button type="button" data-ot="limit" aria-pressed="true" data-i18n="mk.limit">Limit</button><button type="button" data-ot="market" aria-pressed="false" data-i18n="mk.market">Market</button></div>
-        </div>
-        <div class="fcols">
-          <div class="fcol" data-side="buy">
-            <div class="avbl"><span data-i18n="mk.avbl">Available</span><b>0 KRW</b></div>
-            <div class="field"><label data-i18n="mk.price">Price</label><input inputmode="decimal" class="f-px" value="1,000"><em>KRW</em></div>
-            <div class="field"><label data-i18n="mk.amount">Amount</label><input inputmode="decimal" class="f-amt" placeholder="0.00"><em>MST</em></div>
-            <input type="range" class="pct" min="0" max="100" step="25" value="0" aria-label="Percent">
-            <div class="pct-marks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
-            <div class="field"><label data-i18n="mk.total">Total</label><input class="f-tot" readonly value="0"><em>KRW</em></div>
-            <button type="button" class="btn buy" data-i18n="mk.buy">Buy MST</button>
-          </div>
-          <div class="fcol" data-side="sell">
-            <div class="avbl"><span data-i18n="mk.avbl2">Available</span><b>0 MST</b></div>
-            <div class="field"><label data-i18n="mk.price2">Price</label><input inputmode="decimal" class="f-px" value="1,000"><em>KRW</em></div>
-            <div class="field"><label data-i18n="mk.amount2">Amount</label><input inputmode="decimal" class="f-amt" placeholder="0.00"><em>MST</em></div>
-            <input type="range" class="pct" min="0" max="100" step="25" value="0" aria-label="Percent">
-            <div class="pct-marks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
-            <div class="field"><label data-i18n="mk.total2">Total</label><input class="f-tot" readonly value="0"><em>KRW</em></div>
-            <button type="button" class="btn sell" data-i18n="mk.sell">Sell MST</button>
-          </div>
-        </div>
-        <div class="orders"><span data-i18n="mk.open">Open orders (0)</span><span data-i18n="mk.noorders">No open orders</span></div>
-      </div>
-
-      <div class="panel trades">
-        <div class="panel-h"><div class="ttabs" id="ttabs"><button type="button" data-t="mkt" aria-pressed="true" data-i18n="mk.trades">Market trades</button><button type="button" data-t="my" aria-pressed="false" data-i18n="mk.mytrades">My trades</button></div></div>
-        <div class="ob-head"><span data-i18n="mk.px2">Price (KRW)</span><span data-i18n="mk.amt2">Amount (MST)</span><span data-i18n="mk.time">Time</span></div>
-        <div class="tr-list" id="trList"></div>
-        <div class="empty" id="myTrades" hidden data-i18n="mk.nomy">No trades yet</div>
-      </div>
-    </div>
-  </section>
-
   <!-- 3 FEATURES -->
   <section id="features">
-    <span class="kicker">04</span>
+    <span class="kicker">05</span>
     <h2 data-i18n="feat.h">Platform features</h2>
     <p class="sub" data-i18n="feat.sub">Services currently offered on the MST network.</p>
     <div class="grid g2">
@@ -464,13 +340,14 @@
       <div class="card reveal"><span class="tag" data-i18n="feat.t.tok2">Tokenisation</span><h3 data-i18n="feat.f5h">SBT (soul-bound tokens)</h3><p data-i18n="feat.f5p">Non-transferable credentials permanently bound to the receiving wallet, with one designated guardian address — suited to certificates and qualifications.</p><span class="addr mono">SBT 0x58EA439b075e01E7a681b7798e3d8022e619eAD8</span></div>
       <div class="card reveal"><span class="tag" data-i18n="feat.t.tok3">Tokenisation</span><h3 data-i18n="feat.f6h">RWA (real-world assets)</h3><p data-i18n="feat.f6p">Original asset files (images, PDFs) are stored on IPFS and the resulting CID is written into an on-chain token for the recipient’s wallet.</p><span class="addr mono">RWA 0x44FDE9228ED16B64Af6C4Bf8f4f985079184c639</span></div>
       <div class="card reveal"><span class="tag" data-i18n="feat.t.prot">Protection</span><h3 data-i18n="feat.f7h">IPFS security registration for AI models</h3><p data-i18n="feat.f7p">AI model files are AES-256 encrypted, stored on IPFS and their CID is time-stamped on-chain, so unauthorised modification can be detected and versions restored. Access is controlled per API key. Currently in pilot.</p></div>
+      <div class="card reveal"><span class="tag" data-i18n="feat.t.mine">Network</span><h3 data-i18n="feat.f9h">MST mining (in development)</h3><p data-i18n="feat.f9p">Participants contribute computing power and receive MST, connected to the staking module. A web dashboard will start mining and show mined amounts.</p></div>
       <div class="card reveal"><span class="tag" data-i18n="feat.t.dev">Developers</span><h3 data-i18n="feat.f8h">REST API &amp; dashboard</h3><p data-i18n="feat.f8p">Issue tokens and execute smart contracts through API calls (OpenAPI 3.1). Every response returns a <code>transactionHash</code> as on-chain evidence; status and logs are visible on the dashboard.</p></div>
     </div>
   </section>
 
   <!-- 4 SECURITY -->
   <section id="security">
-    <span class="kicker">05</span>
+    <span class="kicker">06</span>
     <h2 data-i18n="sec.h">Security architecture</h2>
     <p class="sub" data-i18n="sec.sub">Controls already in place. These map directly to Cyber Trust and DPTM requirements.</p>
     <div class="grid g3">
@@ -483,9 +360,38 @@
     </div>
   </section>
 
+
+  <!-- PILOTS -->
+  <section id="pilots">
+    <span class="kicker">07</span>
+    <h2 data-i18n="pl.h">Small-scale pilots</h2>
+    <p class="sub" data-i18n="pl.sub">Controlled pilots that test network stability, small-scale token issuance and circulation, and produce the operating record for later stages.</p>
+    <div class="grid g3">
+      <div class="card reveal"><span class="tag" data-i18n="pl.p1t">Community · Nov 2026</span><h3 data-i18n="pl.p1h">Community bazaar points</h3><p data-i18n="pl.p1p">ERC-20 points issued on chain 7601 for a community bazaar with 1,000+ expected visitors, used at selected booths. Network fees are paid in MST and bundled into issuance, so visitors see simple points. 10% of the value used is donated to the local community.</p><span class="badge b-wip" data-i18n="st.wip">In progress</span></div>
+      <div class="card reveal"><span class="tag" data-i18n="pl.p2t">Enterprise</span><h3 data-i18n="pl.p2h">IP-collateral loan workflow</h3><p data-i18n="pl.p2p">A borrower uploads a patent; the evaluator receives a view-access SBT and issues an AI-assisted evaluation report; on approval the lender receives a loan-claim NFT. All signing steps run through the user’s wallet.</p><span class="badge b-wip" data-i18n="st.wip2">In progress</span></div>
+      <div class="card reveal"><span class="tag" data-i18n="pl.p3t">Network</span><h3 data-i18n="pl.p3h">Mining capacity test</h3><p data-i18n="pl.p3p">MST mining tested on a laptop and on a GPU server to measure hash rate, so issuance to participants can be planned. A web page to start mining and track mined amounts is in development, linked to the staking module.</p><span class="badge b-wip" data-i18n="st.wip3">In progress</span></div>
+    </div>
+  </section>
+
+  <!-- RISKS -->
+  <section id="risks">
+    <span class="kicker">08</span>
+    <h2 data-i18n="rk.h">Risk disclosures</h2>
+    <p class="sub" data-i18n="rk.sub">Main risks for users and partners of the MST network.</p>
+    <div class="check">
+      <div class="row"><div><h4 data-i18n="rk.1h">Technology risk</h4><p data-i18n="rk.1p">Network outages, software defects or performance below stated figures can delay or fail transactions.</p></div></div>
+      <div class="row"><div><h4 data-i18n="rk.2h">Smart-contract risk</h4><p data-i18n="rk.2p">Contracts for wrapping, staking, bridging and token issuance may contain undiscovered vulnerabilities. Independent audits are planned but not yet complete.</p></div></div>
+      <div class="row"><div><h4 data-i18n="rk.3h">Bridge risk</h4><p data-i18n="rk.3p">Cross-network transfers depend on a relay process; failure or compromise of the relay can delay or lose transfers.</p></div></div>
+      <div class="row"><div><h4 data-i18n="rk.4h">Key-management risk</h4><p data-i18n="rk.4p">Loss or theft of a wallet’s private key means loss of the assets it controls. MUSTSEM cannot recover user-held keys.</p></div></div>
+      <div class="row"><div><h4 data-i18n="rk.5h">Value and liquidity risk</h4><p data-i18n="rk.5p">MST has no guaranteed value and may not be exchangeable for money. It is a network-fee token, not an investment product.</p></div></div>
+      <div class="row"><div><h4 data-i18n="rk.6h">Regulatory risk</h4><p data-i18n="rk.6p">Laws in Singapore, Korea or other jurisdictions may change and restrict or end some services.</p></div></div>
+      <div class="row"><div><h4 data-i18n="rk.7h">Pilot risk</h4><p data-i18n="rk.7p">Pilot services run with limited scale and may be changed or stopped based on results.</p></div></div>
+    </div>
+  </section>
+
   <!-- 5 TRACKS -->
   <section id="tracks">
-    <span class="kicker">06</span>
+    <span class="kicker">09</span>
     <h2 data-i18n="trk.h">Certification &amp; recognition tracks</h2>
     <p class="sub" data-i18n="trk.sub">Each track is independent. Priority reflects legal risk, impact on credibility and how much it unlocks the others.</p>
     <div class="grid g2">
@@ -495,13 +401,13 @@
         <dl>
           <dt data-i18n="lbl.auth">Authority</dt><dd data-i18n="ta.auth">Monetary Authority of Singapore</dd>
           <dt data-i18n="lbl.law">Law</dt><dd data-i18n="ta.law">Payment Services Act 2019 · Securities and Futures Act · FSMA 2022 Part 9 (in force since 30 Jun 2025)</dd>
-          <dt data-i18n="lbl.why">Why</dt><dd data-i18n="ta.why">MST is locked as collateral, wrapped, bridged and staked for a 2% yield — features regulators look at when deciding whether a token is a digital payment token. Singapore-based firms providing digital token services need a licence even if they serve only overseas customers, and MAS has said it will generally not grant such overseas-only licences. RWA tokens may additionally be capital markets products.</dd>
+          <dt data-i18n="lbl.why">Why</dt><dd data-i18n="ta.why">Stage 1 targets the narrowest scope: MST as a network-fee utility token, with small-scale payment and circulation pilots inside the MAS sandbox at SPI scale. MAS classifies tokens by substance, not by label, so actual operation must match this scope. Singapore-based firms providing digital token services need a licence even if they serve only overseas customers.</dd>
         </dl>
         <ul>
-          <li data-i18n="ta.l1">Obtain a Singapore legal opinion classifying MST, wMST, enterprise native coins, NFTs, SBTs and RWA tokens</li>
+          <li data-i18n="ta.l1">Obtain a Singapore legal opinion confirming the Stage 1 utility scope for MST, wMST and enterprise native coins</li>
           <li data-i18n="ta.l2">Review whether staking rewards and the bridge can be offered in or from Singapore, and to whom</li>
           <li data-i18n="ta.l3">Define RWA scope (record of an asset vs. ownership or investment rights)</li>
-          <li data-i18n="ta.l4">If a licence is needed, assess the MAS FinTech Regulatory Sandbox</li>
+          <li data-i18n="ta.l4">Apply to the MAS FinTech Regulatory Sandbox for small-scale pilots within SPI scope</li>
         </ul>
       </article>
 
@@ -514,6 +420,7 @@
         <ul>
           <li data-i18n="tb.l1">Decide the Singapore role: operating company, R&amp;D/technology subsidiary, or partner</li>
           <li data-i18n="tb.l2">Decide which entity holds MST treasury, staking reward wallet, bridge relayer and HSM keys</li>
+          <li data-i18n="tb.l3">Set up a Singapore office and at least one resident director</li>
         </ul>
       </article>
 
@@ -526,7 +433,7 @@
           <dt data-i18n="lbl.why">Why</dt><dd data-i18n="tc.why">Singapore’s national cybersecurity certification, also recognised outside Singapore. Since April 2025 it covers cloud and AI security — relevant to our cloud HSM and AI-model registration service.</dd>
         </dl>
         <ul>
-          <li data-i18n="tc.l1">Complete the CSA self-assessment template against the controls in section 4</li>
+          <li data-i18n="tc.l1">Complete the CSA self-assessment template against the security controls on this page</li>
           <li data-i18n="tc.l2">Add independent penetration test and written incident-response plan</li>
           <li data-i18n="tc.l3">Engage a CSA-appointed certification body</li>
         </ul>
@@ -578,10 +485,16 @@
 
   <!-- 6 READINESS -->
   <section id="readiness">
-    <span class="kicker">07</span>
+    <span class="kicker">10</span>
     <h2 data-i18n="rd.h">Readiness checklist</h2>
     <p class="sub" data-i18n="rd.sub">What is in place and what an auditor or regulator will ask for first. Items marked “To do” should be closed before engaging a certification body.</p>
     <div class="check">
+      <div class="grp" data-i18n="rd.g0">Stage 1 scope</div>
+      <div class="row"><div><h4 data-i18n="rd.z1h">Trading interface removed</h4><p data-i18n="rd.z1p">No exchange, price or order screens on the certification page.</p></div><span class="badge b-ok" data-i18n="st.ok2">Done</span></div>
+      <div class="row"><div><h4 data-i18n="rd.z2h">Risk disclosures published</h4><p data-i18n="rd.z2p">Technology, contract, bridge, key, value, regulatory and pilot risks stated on this page.</p></div><span class="badge b-ok" data-i18n="st.ok3">Done</span></div>
+      <div class="row"><div><h4 data-i18n="rd.z3h">Pilot records</h4><p data-i18n="rd.z3p">Collect transaction data, participant numbers and incident logs from each pilot as evidence.</p></div><span class="badge b-wip" data-i18n="st.wip4">In progress</span></div>
+      <div class="row"><div><h4 data-i18n="rd.z4h">Mining module</h4><p data-i18n="rd.z4p">Mining linked to staking, with a dashboard and measured hash-rate figures.</p></div><span class="badge b-wip" data-i18n="st.wip5">In progress</span></div>
+      <div class="row"><div><h4 data-i18n="rd.z5h">Singapore office and resident director</h4><p data-i18n="rd.z5p">Required for incorporation and for any MAS application.</p></div><span class="badge b-todo" data-i18n="st.todo2">To do</span></div>
       <div class="grp" data-i18n="rd.g1">Network</div>
       <div class="row"><div><h4 data-i18n="rd.n1h">MST mainnet live</h4><p data-i18n="rd.n1p">Chain 7601 running with wMST, Staking, SBT and RWA contracts deployed.</p></div><span class="badge b-ok" data-i18n="st.ok">Done</span></div>
       <div class="row"><div><h4 data-i18n="rd.n2h">Publish consensus and validator set</h4><p data-i18n="rd.n2p">Document the consensus mechanism, number and location of validators, and who operates them.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
@@ -613,22 +526,24 @@
 
   <!-- 7 ROADMAP -->
   <section id="roadmap">
-    <span class="kicker">08</span>
+    <span class="kicker">11</span>
     <h2 data-i18n="rm.h">Roadmap</h2>
     <p class="sub" data-i18n="rm.sub">Indicative timeline. Dates depend on legal review and certification-body availability.</p>
     <div class="road">
-      <div class="phase reveal"><div class="when" data-i18n="rm.p1w">Phase 1 · Nov – Dec 2026</div><h3 data-i18n="rm.p1h">Legal clarity and documentation</h3>
-        <ul><li data-i18n="rm.p1l1">Engage Singapore counsel for MST / wMST / RWA classification</li><li data-i18n="rm.p1l2">Publish consensus, validator set, explorer and English whitepaper</li><li data-i18n="rm.p1l3">Confirm HSM validation status</li></ul></div>
-      <div class="phase reveal"><div class="when" data-i18n="rm.p2w">Phase 2 · Q1 2027</div><h3 data-i18n="rm.p2h">Entity and assurance</h3>
-        <ul><li data-i18n="rm.p2l1">Singapore entity set-up aligned with the legal opinion</li><li data-i18n="rm.p2l2">Smart-contract and bridge audit; penetration test</li><li data-i18n="rm.p2l3">Policy set mapped to SS 712:2025 and PDPA</li></ul></div>
-      <div class="phase reveal"><div class="when" data-i18n="rm.p3w">Phase 3 · Q2 2027</div><h3 data-i18n="rm.p3h">Certification</h3>
-        <ul><li data-i18n="rm.p3l1">CSA Cyber Essentials, then Cyber Trust audit</li><li data-i18n="rm.p3l2">DPTM application</li><li data-i18n="rm.p3l3">OpenAttestation-compatible SBT and RWA documents</li></ul></div>
+      <div class="phase reveal"><div class="when" data-i18n="rm.p1w">Phase 1 · Nov – Dec 2026</div><h3 data-i18n="rm.p1h">Stage 1 definition and first pilots</h3>
+        <ul><li data-i18n="rm.p1l1">Singapore legal opinion on the network-fee utility scope</li><li data-i18n="rm.p1l2">Community bazaar pilot and mining capacity test</li><li data-i18n="rm.p1l3">Publish consensus, validator set, explorer and English whitepaper</li></ul></div>
+      <div class="phase reveal"><div class="when" data-i18n="rm.p2w">Phase 2 · Q1 2027</div><h3 data-i18n="rm.p2h">Entity, sandbox application and assurance</h3>
+        <ul><li data-i18n="rm.p2l1">Singapore entity, office and resident director</li><li data-i18n="rm.p2l2">MAS sandbox application for small-scale pilots within SPI scope</li><li data-i18n="rm.p2l3">Smart-contract and bridge audit; penetration test</li></ul></div>
+      <div class="phase reveal"><div class="when" data-i18n="rm.p3w">Phase 3 · Q2 – Q3 2027</div><h3 data-i18n="rm.p3h">Sandbox pilot and certification</h3>
+        <ul><li data-i18n="rm.p3l1">Run sandbox pilot with enterprise clients</li><li data-i18n="rm.p3l2">CSA Cyber Essentials, then Cyber Trust audit</li><li data-i18n="rm.p3l3">DPTM application</li></ul></div>
+      <div class="phase reveal"><div class="when" data-i18n="rm.p4w">Phase 4 · After sandbox</div><h3 data-i18n="rm.p4h">Next stage review</h3>
+        <ul><li data-i18n="rm.p4l1">Review pilot results with MAS and counsel</li><li data-i18n="rm.p4l2">Decide on further licences before adding regulated services</li></ul></div>
     </div>
   </section>
 
   <!-- 8 DOCUMENTS -->
   <section id="documents">
-    <span class="kicker">09</span>
+    <span class="kicker">12</span>
     <h2 data-i18n="doc.h">Documents to prepare</h2>
     <p class="sub" data-i18n="doc.sub">All in English, kept in one evidence folder.</p>
     <ul class="docs">
@@ -644,6 +559,9 @@
       <li data-i18n="doc.l10">Legal opinion on token classification</li>
       <li data-i18n="doc.l11">API specification (OpenAPI 3.1)</li>
       <li data-i18n="doc.l12">CSA self-assessment template (completed)</li>
+      <li data-i18n="doc.l13">Pilot reports and on-chain activity records</li>
+      <li data-i18n="doc.l14">Risk disclosure statement</li>
+      <li data-i18n="doc.l15">Sandbox application (test plan, risk matrix, exit plan)</li>
     </ul>
   </section>
 
@@ -665,33 +583,53 @@
     <p>© 2026 MUSTSEM</p>
   </div>
 </footer>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 
 <script>
 /* ---------- Korean translations (English in the HTML is the source of truth) ---------- */
 const KO = {
-  "nav.market":"시세",
-  "mk.h":"MST 마켓","mk.sub":"원화 기준 MST 가격 차트, 호가창, 주문 화면입니다.",
-  "mk.demo":"데모","mk.demotxt":"화면 미리보기용 모의 데이터입니다. MST는 이 페이지에서 상장·거래되지 않으며, 기준 가격은 ₩1,000으로 고정되어 있고 주문은 실행되지 않습니다.",
-  "mk.chg":"24시간 변동","mk.high":"24시간 최고","mk.low":"24시간 최저","mk.volm":"24시간 거래량 (MST)","mk.volk":"24시간 거래대금 (KRW)",
-  "mk.chart":"차트","mk.book":"호가창","mk.px":"가격 (KRW)","mk.amt":"수량 (MST)","mk.tot":"합계 (KRW)",
-  "mk.limit":"지정가","mk.market":"시장가","mk.avbl":"주문 가능","mk.avbl2":"주문 가능","mk.price":"가격","mk.price2":"가격","mk.amount":"수량","mk.amount2":"수량","mk.total":"합계","mk.total2":"합계",
-  "mk.buy":"MST 매수","mk.sell":"MST 매도","mk.open":"미체결 주문 (0)","mk.noorders":"미체결 주문이 없습니다",
-  "mk.trades":"최근 체결","mk.mytrades":"내 체결","mk.nomy":"체결 내역이 없습니다","mk.px2":"가격 (KRW)","mk.amt2":"수량 (MST)","mk.time":"시간",
+  "nav.approach":"인증 단계","nav.utility":"토큰 용도","nav.pilots":"실증","nav.risks":"위험 고지",
+  "ap.h":"단계별 인증 전략","ap.sub":"인증받을 수 있는 가장 좁은 범위에서 시작해 운영 기록을 쌓은 뒤 확장합니다. 단계마다 요건이 다릅니다.",
+  "ap.s1t":"1단계 · 현재","ap.s1h":"네트워크 수수료 용도","ap.s1p":"MST는 MST 네트워크의 가스비와 API 이용 수수료를 내는 데 쓰입니다. 소규모 실증은 MAS 샌드박스 안에서 표준지급기관(SPI) 규모로 진행합니다.",
+  "ap.s2t":"2단계","ap.s2h":"운영 기록 축적","ap.s2p":"실증 결과, 온체인 활동 기록, 보안 인증을 증빙으로 쌓습니다. 서비스 확장은 법적 판단이 확인된 범위에서만 합니다.",
+  "ap.s3t":"3단계 · 이후","ap.s3h":"규제 서비스 (추진 시)","ap.s3p":"지급서비스·자본시장 규제에 해당하는 서비스(예: 소유권이 붙은 토큰화 자산)는 해당 MAS 라이선스를 받은 뒤에만 제공합니다.",
+  "ut.h":"MST 토큰 용도 (1단계 범위)","ut.sub":"1단계 동안 MST가 네트워크에서 쓰이는 방식과, 이 범위를 지키기 위한 경계입니다.",
+  "ut.inh":"사용 용도","ut.in1":"체인 7601 트랜잭션 가스비","ut.in2":"토큰 발행·스마트컨트랙트 호출 API 이용 수수료","ut.in3":"기업 전용 네트워크 담보 (네이티브 코인 1:1000 발행, 전액 담보)","ut.in4":"채굴 등 네트워크 참여 보상 (개발 중)",
+  "ut.outh":"1단계에 포함하지 않는 것","ut.out1":"MST에 배당·수익 배분·소유 권리 없음","ut.out2":"이 플랫폼에서 MST 교환·중개·거래 서비스 없음","ut.out3":"MST 공개 판매·투자 권유 없음","ut.out4":"법적 확인 전에는 싱가포르에서 개인 대상 스테이킹·대여 미제공",
+  "feat.t.mine":"네트워크","feat.f9h":"MST 채굴 (개발 중)","feat.f9p":"참여자가 컴퓨팅 자원을 제공하고 MST를 받으며, 스테이킹 모듈과 연동됩니다. 웹 대시보드에서 채굴을 시작하고 채굴량을 확인할 수 있게 됩니다.",
+  "pl.h":"소규모 실증","pl.sub":"네트워크 안정성, 소규모 토큰 발행·유통을 시험하고 다음 단계에 필요한 운영 기록을 만드는 통제된 실증입니다.",
+  "pl.p1t":"커뮤니티 · 2026년 11월","pl.p1h":"커뮤니티 바자회 포인트","pl.p1p":"방문객 1,000명 이상이 예상되는 커뮤니티 바자회에서 체인 7601에 발행한 ERC-20 포인트를 일부 부스에서 사용합니다. 네트워크 수수료는 MST로 내고 발행 시 함께 지급해, 방문객은 간단한 포인트만 보게 됩니다. 사용 금액의 10%는 지역사회에 기부합니다.",
+  "pl.p2t":"기업","pl.p2h":"지식재산 담보 대출 흐름","pl.p2p":"차주가 특허를 올리면 평가사가 열람 SBT를 받아 AI 보조 평가 보고서를 내고, 승인 시 대출 기관이 대출 채권 NFT를 받습니다. 모든 서명 단계는 이용자 지갑으로 진행합니다.",
+  "pl.p3t":"네트워크","pl.p3h":"채굴 처리량 시험","pl.p3p":"노트북과 GPU 서버에서 MST 채굴을 시험해 해시레이트를 측정하고, 참여자에게 배분할 수 있는 수량을 계획합니다. 채굴을 시작하고 채굴량을 확인하는 웹페이지를 스테이킹 모듈과 연동해 개발 중입니다.",
+  "st.wip2":"진행 중","st.wip3":"진행 중","st.wip4":"진행 중","st.wip5":"진행 중","st.ok2":"완료","st.ok3":"완료","st.todo2":"미착수",
+  "rk.h":"위험 고지","rk.sub":"MST 네트워크 이용자와 파트너가 알아야 할 주요 위험입니다.",
+  "rk.1h":"기술 위험","rk.1p":"네트워크 장애, 소프트웨어 결함, 공지된 수치보다 낮은 성능으로 거래가 지연되거나 실패할 수 있습니다.",
+  "rk.2h":"스마트컨트랙트 위험","rk.2p":"래핑·스테이킹·브릿지·토큰 발행 컨트랙트에 발견되지 않은 취약점이 있을 수 있습니다. 외부 감사는 예정되어 있으나 아직 완료되지 않았습니다.",
+  "rk.3h":"브릿지 위험","rk.3p":"네트워크 간 이동은 릴레이 절차에 의존하며, 릴레이 장애나 침해 시 이동이 지연되거나 자산을 잃을 수 있습니다.",
+  "rk.4h":"키 관리 위험","rk.4p":"지갑 개인키를 잃거나 도난당하면 그 지갑의 자산을 잃습니다. 머스트셈은 이용자가 보관한 키를 복구할 수 없습니다.",
+  "rk.5h":"가치·유동성 위험","rk.5p":"MST는 가치가 보장되지 않으며 현금으로 교환되지 않을 수 있습니다. 투자 상품이 아닌 네트워크 수수료 토큰입니다.",
+  "rk.6h":"규제 위험","rk.6p":"싱가포르, 한국 등 각국 법령이 바뀌어 일부 서비스가 제한되거나 중단될 수 있습니다.",
+  "rk.7h":"실증 위험","rk.7p":"실증 서비스는 제한된 규모로 운영되며 결과에 따라 변경되거나 중단될 수 있습니다.",
+  "tb.l3":"싱가포르 사무실과 거주 이사 1명 이상 확보",
+  "rd.g0":"1단계 범위","rd.z1h":"거래 화면 제거","rd.z1p":"인증 페이지에 거래소·시세·주문 화면을 두지 않습니다.","rd.z2h":"위험 고지 게시","rd.z2p":"기술, 컨트랙트, 브릿지, 키, 가치, 규제, 실증 위험을 이 페이지에 명시했습니다.",
+  "rd.z3h":"실증 기록","rd.z3p":"각 실증의 거래 데이터, 참여자 수, 사고 기록을 증빙으로 모읍니다.","rd.z4h":"채굴 모듈","rd.z4p":"스테이킹과 연동된 채굴, 대시보드, 측정된 해시레이트 수치.","rd.z5h":"싱가포르 사무실·거주 이사","rd.z5p":"법인 설립과 MAS 신청에 필요합니다.",
+  "rm.p4w":"4단계 · 샌드박스 이후","rm.p4h":"다음 단계 검토","rm.p4l1":"MAS·법률 자문과 실증 결과 검토","rm.p4l2":"규제 대상 서비스를 추가하기 전에 추가 라이선스 여부 결정",
+  "doc.l13":"실증 보고서·온체인 활동 기록","doc.l14":"위험 고지문","doc.l15":"샌드박스 신청서 (시험 계획, 위험 매트릭스, 종료 계획)",
+
 
   "hero.eyebrow":"싱가포르 인증 준비",
   "hero.title":"<span class=\"grad\">MST 네트워크</span> — 플랫폼 기능 및 싱가포르 인증 계획",
-  "hero.lead":"머스트셈(MST) 네트워크가 현재 제공하는 기능, 추진할 싱가포르 국가 인증·규제 인정, 그리고 신청 전에 준비해야 할 사항을 한곳에 정리한 문서입니다.",
+  "hero.lead":"머스트셈(MST) 네트워크가 현재 제공하는 기능과 싱가포르 인증 방법을 한곳에 정리한 문서입니다. 가장 좁은 범위인 ‘네트워크 수수료용 유틸리티 토큰’에서 시작해 소규모 실증으로 검증합니다.",
   "hero.owner":"담당: 머스트셈 (MUSTSEM)",
   "hero.updated":"최종 수정: 2026년 10월 22일",
-  "hero.status":"상태: 메인넷 운영 중 · 인증 준비 단계",
+  "hero.status":"상태: 메인넷 운영 중 · 1단계 준비 중",
   "stat.chain":"체인 ID","stat.evm":"완전 호환","stat.tps":"공지된 목표 처리량","stat.24h":"전용 네트워크 구축",
   "nav.summary":"요약","nav.network":"네트워크","nav.features":"기능","nav.security":"보안","nav.tracks":"인증 트랙","nav.readiness":"준비 체크리스트","nav.roadmap":"로드맵","nav.documents":"준비 서류",
 
   "sum.h":"요약",
   "sum.sub":"목표는 MST 네트워크가 싱가포르에서 공신력 있는 국가 단위 인정을 받는 것입니다. MST는 머스트셈이 기업 전용 네트워크를 발급하고, 자산을 브릿지하고, NFT·SBT·실물자산을 토큰화하는 기반 체인입니다.",
   "sum.callout":"<strong>중요:</strong> 싱가포르에는 체인 하나에 발급하는 단일 ‘블록체인 인증서’가 없습니다. 국가 단위 인정은 정부 인증 제도를 여러 겹 쌓아 만듭니다. 사이버보안청(CSA)의 보안 인증, IMDA의 개인정보 보호 인증, IMDA TradeTrust / OpenAttestation 검증 문서 프레임워크 호환, 그리고 MST에 가장 중요한 것으로 MST·wMST·토큰화 자산의 법적 성격에 대한 싱가포르 통화청(MAS) 기준의 명확한 정리입니다.",
-  "sum.c1t":"규제","sum.c1h":"MAS 입장 정리","sum.c1p":"MST는 담보로 예치되고, 보상을 받으며 스테이킹되고, 브릿지됩니다. 법적 성격에 대한 싱가포르 법률 의견서가 가장 먼저입니다.",
+  "sum.c1t":"규제","sum.c1h":"MAS 입장 정리","sum.c1p":"1단계에서 MST는 네트워크 수수료·API 이용 수수료용 유틸리티 토큰으로 정의합니다. 이 범위를 확인하는 싱가포르 법률 의견서가 가장 먼저입니다.",
   "sum.c2t":"보안","sum.c2h":"CSA 사이버 트러스트 마크","sum.c2p":"국가 사이버보안 인증(SS 712:2025). 기존 Vault / HSM / AES-256-GCM 구조가 좋은 출발점입니다.",
   "sum.c3t":"데이터","sum.c3h":"IMDA DPTM","sum.c3p":"개인정보 보호 트러스트마크(SS 714:2025). 회원가입, 대시보드, 상담 신청 양식을 운영하므로 해당됩니다.",
   "sum.c4t":"호환성","sum.c4h":"TradeTrust 호환","sum.c4p":"SBT 자격증명과 RWA 기록을 싱가포르 OpenAttestation 형식으로 검증 가능하게 만듭니다.",
@@ -729,11 +667,11 @@ const KO = {
   "lbl.auth":"기관","lbl.why":"이유","lbl.law":"법령","lbl.std":"표준","lbl.term":"유효기간","lbl.type":"성격",
   "ta.h":"MAS 규제 입장","ta.auth":"싱가포르 통화청(MAS)",
   "ta.law":"지급서비스법 2019 · 증권선물법(SFA) · 금융서비스시장법(FSMA) 2022 제9부 (2025년 6월 30일 시행)",
-  "ta.why":"MST는 담보로 잠기고, 래핑·브릿지되며, 연 2% 수익을 위해 스테이킹됩니다. 규제 당국이 디지털 결제 토큰 여부를 판단할 때 보는 특징들입니다. 싱가포르 기반 기업이 디지털 토큰 서비스를 제공하면 해외 고객만 상대해도 라이선스가 필요하며, MAS는 이런 해외 전용 라이선스를 대체로 내주지 않겠다고 밝혔습니다. RWA 토큰은 자본시장 상품에 해당할 수도 있습니다.",
-  "ta.l1":"MST, wMST, 기업 네이티브 코인, NFT, SBT, RWA 토큰의 법적 성격에 대한 싱가포르 법률 의견서 확보",
+  "ta.why":"1단계는 가장 좁은 범위를 목표로 합니다. MST를 네트워크 수수료용 유틸리티 토큰으로 두고, 소규모 결제·유통 실증은 MAS 샌드박스 안에서 SPI 규모로 진행합니다. MAS는 이름이 아니라 실질로 토큰을 분류하므로 실제 운영이 이 범위와 일치해야 합니다. 싱가포르 기반 기업은 해외 고객만 상대해도 디지털 토큰 서비스에 라이선스가 필요합니다.",
+  "ta.l1":"MST, wMST, 기업 네이티브 코인의 1단계 유틸리티 범위를 확인하는 싱가포르 법률 의견서 확보",
   "ta.l2":"스테이킹 보상과 브릿지를 싱가포르에서 또는 싱가포르로부터, 누구에게 제공할 수 있는지 검토",
   "ta.l3":"RWA 범위 정의 (자산 기록인지, 소유·투자 권리인지)",
-  "ta.l4":"라이선스가 필요하다면 MAS 핀테크 규제 샌드박스 검토",
+  "ta.l4":"SPI 범위 내 소규모 실증을 위해 MAS 핀테크 규제 샌드박스 신청",
   "tb.h":"싱가포르 법인",
   "tb.why":"CSA 인증 비용 지원은 싱가포르 등록 기업만 받을 수 있습니다. 법인 구조에 따라 적용되는 라이선스 규정도 달라지므로 트랙 A와 함께 설계해야 합니다.",
   "tb.l1":"싱가포르 법인의 역할 결정: 운영 법인, R&amp;D·기술 자회사, 또는 파트너",
@@ -741,7 +679,7 @@ const KO = {
   "tc.h":"CSA 사이버 에센셜 → 사이버 트러스트 마크","tc.auth":"싱가포르 사이버보안청(CSA)","tc.std":"Cyber Trust (2025) = 싱가포르 표준 SS 712:2025",
   "tc.term":"사이버 트러스트: 3년, 매년 감사 · 사이버 에센셜: 2년",
   "tc.why":"싱가포르의 국가 사이버보안 인증이며 싱가포르 밖에서도 인정됩니다. 2025년 4월부터 클라우드·AI 보안까지 범위가 넓어져, 클라우드 HSM과 AI 모델 등록 서비스와도 관련이 있습니다.",
-  "tc.l1":"4장의 통제 항목을 기준으로 CSA 자가진단 양식 작성","tc.l2":"외부 모의해킹과 문서화된 사고 대응 계획 추가","tc.l3":"CSA 지정 인증기관에 심사 의뢰",
+  "tc.l1":"이 페이지의 보안 통제 항목을 기준으로 CSA 자가진단 양식 작성","tc.l2":"외부 모의해킹과 문서화된 사고 대응 계획 추가","tc.l3":"CSA 지정 인증기관에 심사 의뢰",
   "td.h":"IMDA 개인정보 보호 트러스트마크(DPTM)","td.auth":"IMDA · 개인정보보호위원회(PDPC)",
   "td.why":"PDPA를 준수하는 데이터 처리를 기업 전체 단위로 인증하는 자율 제도로, IMDA 지정 인증기관이 심사하고 매년 사후 심사를 합니다. 계정·연락처·회사 정보를 수집하므로 해당됩니다.",
   "td.l1":"개인정보는 체인 밖에 두고, MST에는 해시와 CID만 저장","td.l2":"개인정보 보호책임자(DPO) 지정, PDPA에 맞춘 영문 개인정보처리방침·이용약관 게시","td.l3":"데이터 보관·파기 기간 문서화",
@@ -776,12 +714,12 @@ const KO = {
   "rd.d4h":"영문 이용약관·개인정보처리방침","rd.d4p":"기존 약관과 개인정보처리방침을 싱가포르 PDPA에 맞춥니다.",
 
   "rm.h":"로드맵","rm.sub":"예상 일정입니다. 법률 검토와 인증기관 일정에 따라 달라질 수 있습니다.",
-  "rm.p1w":"1단계 · 2026년 11월 – 12월","rm.p1h":"법적 명확성·문서화",
-  "rm.p1l1":"MST·wMST·RWA 성격 검토를 위한 싱가포르 법률 자문 착수","rm.p1l2":"합의 방식, 검증 노드, 익스플로러, 영문 백서 공개","rm.p1l3":"HSM 인증 상태 확인",
-  "rm.p2w":"2단계 · 2027년 1분기","rm.p2h":"법인·보증",
-  "rm.p2l1":"법률 의견에 맞춘 싱가포르 법인 설립","rm.p2l2":"스마트컨트랙트·브릿지 감사, 모의해킹","rm.p2l3":"SS 712:2025·PDPA 기준 정책 세트",
-  "rm.p3w":"3단계 · 2027년 2분기","rm.p3h":"인증",
-  "rm.p3l1":"CSA 사이버 에센셜, 이어서 사이버 트러스트 심사","rm.p3l2":"DPTM 신청","rm.p3l3":"OpenAttestation 호환 SBT·RWA 문서",
+  "rm.p1w":"1단계 · 2026년 11월 – 12월","rm.p1h":"1단계 정의와 첫 실증",
+  "rm.p1l1":"네트워크 수수료 유틸리티 범위에 대한 싱가포르 법률 의견서","rm.p1l2":"커뮤니티 바자회 실증과 채굴 처리량 시험","rm.p1l3":"합의 방식, 검증 노드, 익스플로러, 영문 백서 공개",
+  "rm.p2w":"2단계 · 2027년 1분기","rm.p2h":"법인·샌드박스 신청·보증",
+  "rm.p2l1":"싱가포르 법인, 사무실, 거주 이사","rm.p2l2":"SPI 범위 소규모 실증을 위한 MAS 샌드박스 신청","rm.p2l3":"스마트컨트랙트·브릿지 감사, 모의해킹",
+  "rm.p3w":"3단계 · 2027년 2–3분기","rm.p3h":"샌드박스 실증과 인증",
+  "rm.p3l1":"기업 고객과 샌드박스 실증 운영","rm.p3l2":"CSA 사이버 에센셜, 이어서 사이버 트러스트 심사","rm.p3l3":"DPTM 신청",
 
   "doc.h":"준비 서류","doc.sub":"모두 영문으로, 하나의 증빙 폴더에 보관합니다.",
   "doc.l1":"회사 소개서 및 싱가포르 법인 서류","doc.l2":"MST 백서 및 토큰 이코노미","doc.l3":"네트워크 구조: 합의 방식, 검증 노드, 노드 구성","doc.l4":"보안 구조: Vault, HSM, 암호화, RBAC",
@@ -867,178 +805,6 @@ const KO = {
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 })();
-/* ---------- MST market demo (simulated, repeating data) ---------- */
-(function(){
-  const REF = 1000;                                   // fixed reference price (KRW)
-  const fmt = (n, d=0) => n.toLocaleString('en-US', {minimumFractionDigits:d, maximumFractionDigits:d});
-  const isKo = () => document.documentElement.lang === 'ko';
-  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-  function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
-
-  /* ----- candles: mean-reverting walk around ₩1,000, last close = ₩1,000 ----- */
-  const TF = {'1m':60,'15m':900,'1H':3600,'4H':14400,'1D':86400};
-  const SEED = {'1m':11,'15m':23,'1H':37,'4H':41,'1D':53};
-  let tf = '1H', candles = [];
-  function gen(tfKey){
-    const r = rng(SEED[tfKey]), N = 90, step = TF[tfKey]*1000;
-    const amp = {'1m':1.2,'15m':2,'1H':3,'4H':4.5,'1D':7}[tfKey];
-    const end = Math.floor(Date.now()/step)*step;
-    let p = REF, out = [];
-    for (let i=0;i<N;i++){
-      const o = p;
-      p = p + (REF - p)*0.25 + (r()-0.5)*amp*2;
-      let c = i === N-1 ? REF : Math.round(p);
-      const h = Math.max(o,c) + Math.round(r()*amp);
-      const l = Math.min(o,c) - Math.round(r()*amp);
-      out.push({t:end-(N-1-i)*step, o:Math.round(o), h, l, c, v:Math.round(800 + r()*4200)});
-      p = c;
-    }
-    return out;
-  }
-  function ma(arr, n, i){ if (i < n-1) return null; let s=0; for (let k=i-n+1;k<=i;k++) s+=arr[k].c; return s/n; }
-
-  /* ----- 24h stats ----- */
-  function stats(){
-    const d = gen('1H').slice(-24);
-    const hi = Math.max(...d.map(x=>x.h)), lo = Math.min(...d.map(x=>x.l));
-    const vol = d.reduce((a,x)=>a+x.v*12,0);
-    document.getElementById('hi').textContent = fmt(hi);
-    document.getElementById('lo').textContent = fmt(lo);
-    document.getElementById('volM').textContent = fmt(vol);
-    document.getElementById('volK').textContent = fmt(vol*REF);
-  }
-
-  /* ----- canvas chart ----- */
-  const cv = document.getElementById('cv'), ctx = cv.getContext('2d'), info = document.getElementById('chartInfo');
-  let hover = null, W=0, H=0;
-  function size(){ const r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio||1; W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
-  function tlabel(t){ const d=new Date(t); const p=n=>String(n).padStart(2,'0');
-    return (tf==='1D') ? (d.getMonth()+1)+'/'+d.getDate() : (tf==='4H' ? (d.getMonth()+1)+'/'+d.getDate()+' '+p(d.getHours())+':00' : p(d.getHours())+':'+p(d.getMinutes())); }
-  function setInfo(i){
-    const k = candles[i], m7 = ma(candles,7,i), m25 = ma(candles,25,i), cls = k.c>=k.o?'up':'down';
-    const L = isKo() ? ['시가','고가','저가','종가','변동','범위','거래량'] : ['Open','High','Low','Close','Change','Range','Vol'];
-    const ch = (k.c-k.o)/k.o*100, rg = (k.h-k.l)/k.l*100;
-    info.innerHTML = `<span>${tlabel(k.t)}</span><span>${L[0]} <b class="${cls}">${fmt(k.o)}</b></span><span>${L[1]} <b class="${cls}">${fmt(k.h)}</b></span><span>${L[2]} <b class="${cls}">${fmt(k.l)}</b></span><span>${L[3]} <b class="${cls}">${fmt(k.c)}</b></span><span>${L[4]} <b class="${cls}">${ch.toFixed(2)}%</b></span><span>${L[5]} <b class="${cls}">${rg.toFixed(2)}%</b></span><span>${L[6]} <b>${fmt(k.v)}</b></span>`+
-      (m7?`<span class="ma7">MA(7) ${fmt(m7,1)}</span>`:'')+(m25?`<span class="ma25">MA(25) ${fmt(m25,1)}</span>`:'');
-  }
-  function draw(){
-    if (!W) return;
-    const up = css('--up'), down = css('--down'), line = css('--line'), muted = css('--muted'), text = css('--text');
-    ctx.clearRect(0,0,W,H);
-    const padR = 64, padB = 26, top = 10, plotW = W - padR, priceH = (H - padB - top)*0.78, volTop = top + priceH + 8, volH = H - padB - volTop;
-    const n = candles.length, cw = plotW / n, bw = Math.max(1, cw*0.62);
-    let hi = Math.max(...candles.map(k=>k.h)), lo = Math.min(...candles.map(k=>k.l));
-    const pad = (hi-lo)*0.12 || 2; hi += pad; lo -= pad;
-    const y = v => top + (hi - v)/(hi - lo)*priceH, vmax = Math.max(...candles.map(k=>k.v));
-    ctx.font = '11px "IBM Plex Sans", sans-serif'; ctx.textBaseline = 'middle';
-    document.getElementById('volLabel').style.top = (volTop) + 'px';
-    // grid + price axis
-    ctx.strokeStyle = line; ctx.lineWidth = 1; ctx.fillStyle = muted; ctx.textAlign = 'left';
-    for (let i=0;i<=5;i++){ const v = lo + (hi-lo)*i/5, yy = Math.round(y(v))+.5; ctx.beginPath(); ctx.moveTo(0,yy); ctx.lineTo(plotW,yy); ctx.stroke(); if (Math.abs(yy - y(REF)) > 14) ctx.fillText(fmt(v,1), plotW+8, yy); }
-    // time axis
-    ctx.textAlign = 'center';
-    for (let i=8;i<n;i+=18){ const xx = Math.round(i*cw+cw/2)+.5; ctx.beginPath(); ctx.moveTo(xx,top); ctx.lineTo(xx,H-padB); ctx.stroke(); ctx.fillText(tlabel(candles[i].t), xx, H-padB/2); }
-    // candles + volume
-    candles.forEach((k,i)=>{
-      const x = i*cw + cw/2, col = k.c>=k.o ? up : down;
-      ctx.strokeStyle = col; ctx.fillStyle = col;
-      ctx.beginPath(); ctx.moveTo(Math.round(x)+.5, y(k.h)); ctx.lineTo(Math.round(x)+.5, y(k.l)); ctx.stroke();
-      const yo = y(k.o), yc = y(k.c); ctx.fillRect(x-bw/2, Math.min(yo,yc), bw, Math.max(1, Math.abs(yc-yo)));
-      ctx.globalAlpha = .35; const vh = k.v/vmax*volH; ctx.fillRect(x-bw/2, volTop+volH-vh, bw, vh); ctx.globalAlpha = 1;
-    });
-    // moving averages
-    [[7,'#f0b90b'],[25,'#eb40b5']].forEach(([p,c])=>{ ctx.strokeStyle=c; ctx.lineWidth=1.4; ctx.beginPath(); let st=false;
-      candles.forEach((k,i)=>{ const m=ma(candles,p,i); if(m==null) return; const xx=i*cw+cw/2; st?ctx.lineTo(xx,y(m)):(ctx.moveTo(xx,y(m)),st=true); }); ctx.stroke(); });
-    ctx.lineWidth = 1;
-    // last price line
-    const yl = Math.round(y(REF))+.5; ctx.setLineDash([4,4]); ctx.strokeStyle = up; ctx.beginPath(); ctx.moveTo(0,yl); ctx.lineTo(plotW,yl); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = up; ctx.fillRect(plotW, yl-10, padR, 20); ctx.fillStyle = '#fff'; ctx.textAlign='left'; ctx.fillText(fmt(REF,1), plotW+8, yl);
-    // crosshair
-    if (hover){
-      const i = Math.min(n-1, Math.max(0, Math.floor(hover.x / cw))), xx = Math.round(i*cw+cw/2)+.5;
-      ctx.strokeStyle = muted; ctx.setLineDash([3,3]); ctx.beginPath(); ctx.moveTo(xx,top); ctx.lineTo(xx,H-padB); ctx.moveTo(0,Math.round(hover.y)+.5); ctx.lineTo(plotW,Math.round(hover.y)+.5); ctx.stroke(); ctx.setLineDash([]);
-      if (hover.y >= top && hover.y <= top+priceH){ const v = hi - (hover.y-top)/priceH*(hi-lo); ctx.fillStyle = text; ctx.fillRect(plotW, hover.y-10, padR, 20); ctx.fillStyle = css('--bg'); ctx.fillText(fmt(v,1), plotW+8, hover.y); }
-      setInfo(i);
-    } else setInfo(n-1);
-  }
-  function setTf(k){ tf = k; candles = gen(k); document.querySelectorAll('#tfs button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.tf===k))); draw(); }
-  document.getElementById('tfs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setTf(b.dataset.tf); });
-  cv.addEventListener('mousemove', e => { const r = cv.getBoundingClientRect(); hover = {x:e.clientX-r.left, y:e.clientY-r.top}; draw(); });
-  cv.addEventListener('mouseleave', () => { hover = null; draw(); });
-  new ResizeObserver(() => { size(); draw(); }).observe(cv.parentElement);
-  new MutationObserver(draw).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme','lang']});
-
-  /* ----- order book: same quantity pattern, rotated every tick ----- */
-  const QTY = [1240.5, 860.2, 2310.0, 540.75, 1785.3, 3020.1, 690.4, 1455.0, 980.6, 2675.25, 410.9, 1930.0, 75.2, 3.5, 128.0, 612.45, 18.7, 2204.1];
-  const DEPTH = 17;
-  let shift = 0;
-  function book(){
-    const rows = (side) => Array.from({length:DEPTH}, (_,i) => {
-      const px = side==='ask' ? REF + DEPTH - i : REF - 1 - i;
-      const q = QTY[(i + shift + (side==='ask'?5:0)) % QTY.length];
-      return {px, q};
-    });
-    const render = (el, data, rev) => {
-      let cum = 0; const cums = (rev ? [...data].reverse() : data).map(r => (cum += r.q));
-      const max = cum; const c = rev ? cums.reverse() : cums;
-      el.innerHTML = data.map((r,i)=>`<div class="ob-row"><i style="width:${(c[i]/max*100).toFixed(1)}%"></i><span>${fmt(r.px)}</span><span>${fmt(r.q,2)}</span><span>${fmt(r.px*r.q)}</span></div>`).join('');
-    };
-    render(document.getElementById('asks'), rows('ask'), true);
-    render(document.getElementById('bids'), rows('bid'), false);
-  }
-
-  /* ----- market trades: fixed list replayed in a loop ----- */
-  const TRADES = [[1000,152.4,1],[1000,48.0,0],[1001,310.25,1],[1000,22.7,0],[999,95.1,0],[1000,640.0,1],[1000,12.35,1],[1001,205.8,1],[999,77.6,0],[1000,1120.0,0],[1000,33.3,1],[999,410.45,0]];
-  let ti = 0; const trList = document.getElementById('trList');
-  function tradeRow(t, flash){ const d = new Date(), p=n=>String(n).padStart(2,'0');
-    return `<div class="tr-row${flash?' flash':''}"><span class="${t[2]?'up':'down'}">${fmt(t[0])}</span><span>${fmt(t[1],2)}</span><span>${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}</span></div>`; }
-  function pushTrade(flash=true){
-    const t = TRADES[ti++ % TRADES.length];
-    trList.insertAdjacentHTML('afterbegin', tradeRow(t, flash));
-    while (trList.children.length > 34) trList.lastElementChild.remove();
-    // volume of current candle grows; price stays at the reference
-    if (candles.length){ candles[candles.length-1].v += Math.round(t[1]); draw(); }
-  }
-
-  /* ----- order form (calculations only; submission disabled) ----- */
-  const num = v => parseFloat(String(v).replace(/,/g,'')) || 0;
-  document.querySelectorAll('.fcol').forEach(col => {
-    const px = col.querySelector('.f-px'), amt = col.querySelector('.f-amt'), tot = col.querySelector('.f-tot'), pct = col.querySelector('.pct');
-    const calc = () => { tot.value = fmt(num(px.value) * num(amt.value)); };
-    px.addEventListener('input', calc); amt.addEventListener('input', calc);
-    px.addEventListener('blur', () => { px.value = fmt(num(px.value)); });
-    pct.addEventListener('input', () => { amt.value = ''; calc(); });  // balance is 0 in demo
-    col.querySelector('.btn').addEventListener('click', () => toast(isKo() ? '데모 화면입니다 — 주문은 실행되지 않습니다.' : 'Demo only — orders cannot be placed.'));
-  });
-  document.getElementById('ftabs').addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b) return;
-    document.querySelectorAll('#ftabs button').forEach(x => x.setAttribute('aria-pressed', String(x===b)));
-    document.querySelectorAll('.f-px').forEach(i => { i.disabled = b.dataset.ot === 'market'; if (i.disabled) i.value = isKo() ? '시장가' : 'Market'; else i.value = fmt(REF); });
-  });
-  let tt; const toastEl = document.getElementById('toast');
-  function toast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(()=>toastEl.classList.remove('show'), 2200); }
-
-  document.getElementById('obtools').addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b) return;
-    document.querySelectorAll('#obtools button').forEach(x => x.setAttribute('aria-pressed', String(x===b)));
-    const bk = document.querySelector('.book'); bk.classList.toggle('only-bids', b.dataset.v==='bids'); bk.classList.toggle('only-asks', b.dataset.v==='asks');
-  });
-  document.getElementById('ttabs').addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b) return;
-    document.querySelectorAll('#ttabs button').forEach(x => x.setAttribute('aria-pressed', String(x===b)));
-    const my = b.dataset.t === 'my';
-    document.getElementById('myTrades').hidden = !my; trList.hidden = my;
-    document.querySelector('.trades .ob-head').style.display = my ? 'none' : '';
-  });
-
-  /* ----- boot ----- */
-  stats(); size(); setTf('1H'); book();
-  for (let i=0;i<34;i++) pushTrade(false);
-  const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  setInterval(() => { shift = (shift + 1) % QTY.length; book(); }, reduced ? 4000 : 1500);
-  setInterval(() => pushTrade(!reduced), reduced ? 5000 : 2000);
-})();
-
 </script>
 </body>
 </html>
