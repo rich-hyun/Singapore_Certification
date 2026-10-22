@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MST Singapore Readiness</title>
+<meta name="description" content="MUSTSEM Network (MST, chain 7601) — platform features and readiness plan for Singapore national certification and regulatory recognition.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f8fa; --surface:#ffffff; --surface-2:#f1f3f6; --text:#14181f; --muted:#5b6472;
+    --line:#e3e7ec; --accent:#c8102e; --accent-soft:#fdecef; --ok:#1a7f4b; --ok-soft:#e6f4ec;
+    --warn:#a15c00; --warn-soft:#fdf2e1; --todo:#5b6472; --todo-soft:#eef0f3; --info:#1f5fbf; --info-soft:#e8f0fc;
+    --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.05),0 2px 8px rgba(16,24,40,.04);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0e1116; --surface:#161a21; --surface-2:#1d222b; --text:#e8ebf0; --muted:#9aa3b2;
+      --line:#2a303b; --accent:#ff4d64; --accent-soft:#3a1820; --ok:#4cc38a; --ok-soft:#14301f;
+      --warn:#f0a94a; --warn-soft:#352614; --todo:#9aa3b2; --todo-soft:#232833; --info:#6fa3ff; --info-soft:#17233a;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e1116; --surface:#161a21; --surface-2:#1d222b; --text:#e8ebf0; --muted:#9aa3b2;
+    --line:#2a303b; --accent:#ff4d64; --accent-soft:#3a1820; --ok:#4cc38a; --ok-soft:#14301f;
+    --warn:#f0a94a; --warn-soft:#352614; --todo:#9aa3b2; --todo-soft:#232833; --info:#6fa3ff; --info-soft:#17233a;
+    --shadow:none;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,"Noto Sans KR",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  html[lang="ko"] body{font-family:"Noto Sans KR",Inter,system-ui,sans-serif;word-break:keep-all}
+  a{color:var(--info)}
+  code,.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.88em}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+
+  .topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+  .lang button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+
+  .hero{padding:56px 0 32px}
+  .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px}
+  h1{font-size:clamp(28px,5vw,44px);line-height:1.15;letter-spacing:-.02em;margin:16px 0 12px}
+  .lead{font-size:18px;color:var(--muted);max-width:760px;margin:0}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px;font-size:14px;color:var(--muted)}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:28px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat b{display:block;font-size:22px;letter-spacing:-.01em}
+  .stat span{font-size:13px;color:var(--muted)}
+
+  .toc{display:flex;gap:8px;overflow-x:auto;padding:4px 0 24px;scrollbar-width:none}
+  .toc a{flex:none;text-decoration:none;color:var(--text);font-size:14px;font-weight:500;border:1px solid var(--line);background:var(--surface);padding:6px 12px;border-radius:999px}
+  .toc a:hover{border-color:var(--text)}
+
+  section{padding:32px 0;border-top:1px solid var(--line)}
+  h2{font-size:24px;letter-spacing:-.01em;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 24px;max-width:780px}
+  h3{font-size:17px;margin:0 0 6px}
+
+  .callout{background:var(--info-soft);border:1px solid color-mix(in srgb,var(--info) 30%,transparent);border-radius:var(--radius);padding:18px 20px}
+  .callout strong{color:var(--info)}
+  .callout.warn{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+  .callout.warn strong{color:var(--warn)}
+
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .card .tag{font-size:12px;font-weight:600;color:var(--muted);margin-bottom:8px;display:block;text-transform:uppercase;letter-spacing:.06em}
+  .card .addr{display:block;margin-top:10px;font-size:12px;color:var(--muted);word-break:break-all}
+
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+  .kv,.dt{width:100%;border-collapse:collapse;font-size:15px}
+  .kv th,.kv td,.dt th,.dt td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  .kv th{width:34%;color:var(--muted);font-weight:500;background:var(--surface-2)}
+  .kv tr:last-child th,.kv tr:last-child td,.dt tr:last-child td{border-bottom:0}
+  .kv td{word-break:break-all}
+  .dt thead th{background:var(--surface-2);color:var(--muted);font-weight:600;font-size:13px;white-space:nowrap}
+  .dt td{white-space:nowrap}
+  .dt tr.main td{font-weight:600}
+  h3.tbl-h{margin:28px 0 10px}
+
+  .track{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+  .track header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .track .letter{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:700;background:var(--accent-soft);color:var(--accent)}
+  .track dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;font-size:14px}
+  .track dt{color:var(--muted)}
+  .track dd{margin:0}
+  .track ul{margin:0;padding-left:18px;font-size:14px;color:var(--muted)}
+  .prio{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .p1{background:var(--accent-soft);color:var(--accent)}
+  .p2{background:var(--info-soft);color:var(--info)}
+  .p3{background:var(--todo-soft);color:var(--todo)}
+
+  .check{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .check .row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);align-items:start}
+  .check .row:last-child{border-bottom:0}
+  .check .row h4{margin:0 0 2px;font-size:15px}
+  .check .row p{margin:0;font-size:14px;color:var(--muted)}
+  .grp{padding:10px 18px;background:var(--surface-2);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+  .badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .b-ok{background:var(--ok-soft);color:var(--ok)}
+  .b-wip{background:var(--warn-soft);color:var(--warn)}
+  .b-todo{background:var(--todo-soft);color:var(--todo)}
+
+  .road{position:relative;display:grid;gap:16px;padding-left:28px}
+  .road::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .phase{position:relative}
+  .phase::before{content:"";position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+  .phase .when{font-size:13px;font-weight:700;color:var(--accent)}
+  .phase ul{margin:6px 0 0;padding-left:18px;color:var(--muted);font-size:15px}
+
+  .docs{columns:2 280px;column-gap:24px;padding-left:18px;margin:0;color:var(--muted)}
+  .docs li{break-inside:avoid;margin-bottom:6px}
+
+  footer{padding:32px 0 56px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+  footer ol{padding-left:18px}
+  footer li{margin-bottom:4px;word-break:break-all}
+
+  @media (max-width:560px){
+    .kv th{width:40%}
+    .track dl{grid-template-columns:1fr}
+    .track dt{margin-top:6px}
+  }
+  @media print{.topbar,.toc{display:none}section{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span><span>MUSTSEM Network</span></div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="ko" aria-pressed="false">한국어</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="eyebrow" data-i18n="hero.eyebrow">Singapore Certification Readiness</span>
+    <h1 data-i18n="hero.title">MST Network — Platform Features &amp; Singapore Certification Plan</h1>
+    <p class="lead" data-i18n="hero.lead">A single reference for what the MUSTSEM (MST) network offers today, which Singapore national certifications and regulatory recognitions it will pursue, and what must be prepared before applying.</p>
+    <div class="meta">
+      <span data-i18n="hero.owner">Owner: MUSTSEM (머스트셈)</span>
+      <span data-i18n="hero.updated">Last updated: 22 Oct 2026</span>
+      <span data-i18n="hero.status">Status: Mainnet live · Pre-certification</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>7601</b><span data-i18n="stat.chain">Chain ID</span></div>
+      <div class="stat"><b>EVM</b><span data-i18n="stat.evm">Fully compatible</span></div>
+      <div class="stat"><b>10K TPS</b><span data-i18n="stat.tps">Stated target throughput</span></div>
+      <div class="stat"><b>24h</b><span data-i18n="stat.24h">Dedicated network set-up</span></div>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Contents">
+    <a href="#summary" data-i18n="nav.summary">Summary</a>
+    <a href="#network" data-i18n="nav.network">Network</a>
+    <a href="#features" data-i18n="nav.features">Features</a>
+    <a href="#security" data-i18n="nav.security">Security</a>
+    <a href="#tracks" data-i18n="nav.tracks">Certification tracks</a>
+    <a href="#readiness" data-i18n="nav.readiness">Readiness checklist</a>
+    <a href="#roadmap" data-i18n="nav.roadmap">Roadmap</a>
+    <a href="#documents" data-i18n="nav.documents">Documents</a>
+  </nav>
+
+  <!-- 1 SUMMARY -->
+  <section id="summary">
+    <h2 data-i18n="sum.h">1. Executive summary</h2>
+    <p class="sub" data-i18n="sum.sub">Our goal is reputable, national-level recognition from Singapore for the MST network — the base chain on which MUSTSEM issues dedicated enterprise networks, bridges assets and tokenises NFTs, SBTs and real-world assets.</p>
+    <div class="callout">
+      <p style="margin:0" data-i18n="sum.callout"><strong>Important:</strong> Singapore does not issue a single “blockchain certificate” for a chain. National-level recognition is built from a stack of government-backed schemes: cybersecurity certification by the Cyber Security Agency (CSA), data protection certification by IMDA, alignment with IMDA’s TradeTrust / OpenAttestation verifiable-document framework, and — most critically for MST — a clear regulatory position from the Monetary Authority of Singapore (MAS) on how MST, wMST and tokenised assets are classified.</p>
+    </div>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card"><span class="tag" data-i18n="sum.c1t">Regulation</span><h3 data-i18n="sum.c1h">MAS position</h3><p data-i18n="sum.c1p">MST is used as collateral, staked for rewards and bridged. A Singapore legal opinion on its classification comes first.</p></div>
+      <div class="card"><span class="tag" data-i18n="sum.c2t">Security</span><h3 data-i18n="sum.c2h">CSA Cyber Trust mark</h3><p data-i18n="sum.c2p">National cybersecurity certification (SS 712:2025). Our Vault / HSM / AES-256-GCM architecture is a strong starting point.</p></div>
+      <div class="card"><span class="tag" data-i18n="sum.c3t">Data</span><h3 data-i18n="sum.c3h">IMDA DPTM</h3><p data-i18n="sum.c3p">Data Protection Trustmark (SS 714:2025). Applies because the platform runs sign-up, dashboard and consultation forms.</p></div>
+      <div class="card"><span class="tag" data-i18n="sum.c4t">Interoperability</span><h3 data-i18n="sum.c4h">TradeTrust alignment</h3><p data-i18n="sum.c4p">Make SBT credentials and RWA records verifiable in Singapore’s OpenAttestation format.</p></div>
+    </div>
+  </section>
+
+  <!-- 2 NETWORK -->
+  <section id="network">
+    <h2 data-i18n="net.h">2. Network at a glance</h2>
+    <p class="sub" data-i18n="net.sub">MST is the main chain. Enterprise networks are issued on top of it, backed by MST collateral.</p>
+    <div class="tbl-wrap">
+    <table class="kv">
+      <tr><th data-i18n="net.name">Network name</th><td>Mustsem (MUSTSEM Network)</td></tr>
+      <tr><th>Chain ID</th><td class="mono">7601</td></tr>
+      <tr><th data-i18n="net.symbol">Native coin</th><td>MST</td></tr>
+      <tr><th>RPC</th><td class="mono">https://block.mustree.kr</td></tr>
+      <tr><th data-i18n="net.vm">Execution</th><td data-i18n="net.vmv">Fully EVM-compatible</td></tr>
+      <tr><th data-i18n="net.tps">Throughput</th><td data-i18n="net.tpsv">10,000 TPS (stated; varies with network configuration)</td></tr>
+      <tr><th data-i18n="net.cons">Consensus &amp; validators</th><td data-i18n="net.consv">To be published (see readiness checklist)</td></tr>
+      <tr><th data-i18n="net.api">API</th><td data-i18n="net.apiv">REST, OpenAPI 3.1 specification, <code>x-api-key</code> authentication</td></tr>
+      <tr><th data-i18n="net.web">Website</th><td><a href="https://www.mustsem.co.kr/">www.mustsem.co.kr</a></td></tr>
+    </table>
+    </div>
+
+    <h3 class="tbl-h" data-i18n="net.child">Networks operated on MUSTSEM infrastructure</h3>
+    <div class="tbl-wrap">
+    <table class="dt">
+      <thead><tr><th data-i18n="col.net">Network</th><th>Chain ID</th><th data-i18n="col.sym">Symbol</th><th>RPC</th><th data-i18n="col.role">Role</th></tr></thead>
+      <tbody>
+        <tr class="main"><td>Mustsem</td><td class="mono">7601</td><td>MST</td><td class="mono">block.mustree.kr</td><td data-i18n="role.main">Main chain · certification target</td></tr>
+        <tr><td>NABIZAM</td><td class="mono">7602</td><td>NBZ</td><td class="mono">nbmst.mst2.site</td><td data-i18n="role.ded">Dedicated network</td></tr>
+        <tr><td>MDPCD</td><td class="mono">7603</td><td>MDP</td><td class="mono">mdpcd.mst2.site</td><td data-i18n="role.ded2">Dedicated network</td></tr>
+        <tr><td>JKK-TMZ</td><td class="mono">7707</td><td>TMZ</td><td class="mono">jkk.mst2.site</td><td data-i18n="role.bridge">Dedicated network · bridged to MST</td></tr>
+        <tr><td>KukminBank</td><td class="mono">1213</td><td>KBB</td><td class="mono">rpc.mstblock.com</td><td data-i18n="role.nd">Dedicated network · not yet deployed</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- 3 FEATURES -->
+  <section id="features">
+    <h2 data-i18n="feat.h">3. Platform features</h2>
+    <p class="sub" data-i18n="feat.sub">Services currently offered on the MST network.</p>
+    <div class="grid g2">
+      <div class="card"><span class="tag" data-i18n="feat.t.infra">Infrastructure</span><h3 data-i18n="feat.f1h">Dedicated enterprise networks</h3><p data-i18n="feat.f1p">Each enterprise gets an independent, EVM-compatible chain with its own operating policy. Deposited MST is locked as collateral and a native coin is issued at a 1:1000 ratio; no unbacked issuance, and collateral cannot be reduced while the network runs. A governance token can be issued on request. Set-up target: within 24 hours of approval.</p></div>
+      <div class="card"><span class="tag" data-i18n="feat.t.infra2">Infrastructure</span><h3 data-i18n="feat.f2h">Bridge</h3><p data-i18n="feat.f2p">Moves assets between networks. Today: TMZ on JKK-TMZ is wrapped 1:1 into wTMZ, then a relay delivers wMST to the same address on the MST chain.</p><span class="addr mono">Bridge (JKK-TMZ) 0x41bf31f5cfa121deA3875e435382fd0a890ab938</span></div>
+      <div class="card"><span class="tag" data-i18n="feat.t.infra3">Infrastructure</span><h3 data-i18n="feat.f3h">Staking</h3><p data-i18n="feat.f3p">MST wraps 1:1 into wMST. Staked wMST earns MST rewards at 2% per year, claimable every 7 days, with no lock-up period.</p><span class="addr mono">wMST 0x3Dfc5a626a046CE0F01B130fA92dd4ef4A3f714B<br>Staking 0x8Fb01DA4FA713Ce590546dC440165170E02e7D07</span></div>
+      <div class="card"><span class="tag" data-i18n="feat.t.tok">Tokenisation</span><h3 data-i18n="feat.f4h">NFT</h3><p data-i18n="feat.f4p">Issuance and ownership management of digital assets via API (<code>POST /v1/nfts/mint</code>).</p></div>
+      <div class="card"><span class="tag" data-i18n="feat.t.tok2">Tokenisation</span><h3 data-i18n="feat.f5h">SBT (soul-bound tokens)</h3><p data-i18n="feat.f5p">Non-transferable credentials permanently bound to the receiving wallet, with one designated guardian address — suited to certificates and qualifications.</p><span class="addr mono">SBT 0x58EA439b075e01E7a681b7798e3d8022e619eAD8</span></div>
+      <div class="card"><span class="tag" data-i18n="feat.t.tok3">Tokenisation</span><h3 data-i18n="feat.f6h">RWA (real-world assets)</h3><p data-i18n="feat.f6p">Original asset files (images, PDFs) are stored on IPFS and the resulting CID is written into an on-chain token for the recipient’s wallet.</p><span class="addr mono">RWA 0x44FDE9228ED16B64Af6C4Bf8f4f985079184c639</span></div>
+      <div class="card"><span class="tag" data-i18n="feat.t.prot">Protection</span><h3 data-i18n="feat.f7h">IPFS security registration for AI models</h3><p data-i18n="feat.f7p">AI model files are AES-256 encrypted, stored on IPFS and their CID is time-stamped on-chain, so unauthorised modification can be detected and versions restored. Access is controlled per API key. Currently in pilot.</p></div>
+      <div class="card"><span class="tag" data-i18n="feat.t.dev">Developers</span><h3 data-i18n="feat.f8h">REST API &amp; dashboard</h3><p data-i18n="feat.f8p">Issue tokens and execute smart contracts through API calls (OpenAPI 3.1). Every response returns a <code>transactionHash</code> as on-chain evidence; status and logs are visible on the dashboard.</p></div>
+    </div>
+  </section>
+
+  <!-- 4 SECURITY -->
+  <section id="security">
+    <h2 data-i18n="sec.h">4. Security architecture</h2>
+    <p class="sub" data-i18n="sec.sub">Controls already in place. These map directly to Cyber Trust and DPTM requirements.</p>
+    <div class="grid g3">
+      <div class="card"><h3 data-i18n="sec.c1h">Encryption</h3><p data-i18n="sec.c1p">Sensitive data stored only as AES-256-GCM ciphertext, including data on IPFS.</p></div>
+      <div class="card"><h3 data-i18n="sec.c2h">Key management</h3><p data-i18n="sec.c2p">HashiCorp Vault generates, stores and rotates keys; servers never hold plaintext keys. Encryption runs through the Vault Transit API.</p></div>
+      <div class="card"><h3 data-i18n="sec.c3h">HSM signing</h3><p data-i18n="sec.c3p">Transactions are signed only inside an HSM (PKCS#11, CloudHSM); private keys never leave it.</p></div>
+      <div class="card"><h3 data-i18n="sec.c4h">Transport &amp; requests</h3><p data-i18n="sec.c4p">TLS 1.3, HMAC and JWT request authentication, idempotency keys, and HMAC-SHA256-signed webhooks.</p></div>
+      <div class="card"><h3 data-i18n="sec.c5h">Access control</h3><p data-i18n="sec.c5p">Role-based access (operator, developer, verifier) under least privilege.</p></div>
+      <div class="card"><h3 data-i18n="sec.c6h">Audit &amp; monitoring</h3><p data-i18n="sec.c6p">Every request, signature and result is logged in a tamper-evident hash chain on WORM or S3-SSE storage, with 24/7 monitoring. An on-premises Vault/HSM option supports data-sovereignty needs.</p></div>
+    </div>
+  </section>
+
+  <!-- 5 TRACKS -->
+  <section id="tracks">
+    <h2 data-i18n="trk.h">5. Certification &amp; recognition tracks</h2>
+    <p class="sub" data-i18n="trk.sub">Each track is independent. Priority reflects legal risk, impact on credibility and how much it unlocks the others.</p>
+    <div class="grid g2">
+
+      <article class="track">
+        <header><div style="display:flex;gap:12px;align-items:center"><span class="letter">A</span><h3 style="margin:0" data-i18n="ta.h">MAS regulatory position</h3></div><span class="prio p1" data-i18n="prio.1">Priority 1</span></header>
+        <dl>
+          <dt data-i18n="lbl.auth">Authority</dt><dd data-i18n="ta.auth">Monetary Authority of Singapore</dd>
+          <dt data-i18n="lbl.law">Law</dt><dd data-i18n="ta.law">Payment Services Act 2019 · Securities and Futures Act · FSMA 2022 Part 9 (in force since 30 Jun 2025)</dd>
+          <dt data-i18n="lbl.why">Why</dt><dd data-i18n="ta.why">MST is locked as collateral, wrapped, bridged and staked for a 2% yield — features regulators look at when deciding whether a token is a digital payment token. Singapore-based firms providing digital token services need a licence even if they serve only overseas customers, and MAS has said it will generally not grant such overseas-only licences. RWA tokens may additionally be capital markets products.</dd>
+        </dl>
+        <ul>
+          <li data-i18n="ta.l1">Obtain a Singapore legal opinion classifying MST, wMST, enterprise native coins, NFTs, SBTs and RWA tokens</li>
+          <li data-i18n="ta.l2">Review whether staking rewards and the bridge can be offered in or from Singapore, and to whom</li>
+          <li data-i18n="ta.l3">Define RWA scope (record of an asset vs. ownership or investment rights)</li>
+          <li data-i18n="ta.l4">If a licence is needed, assess the MAS FinTech Regulatory Sandbox</li>
+        </ul>
+      </article>
+
+      <article class="track">
+        <header><div style="display:flex;gap:12px;align-items:center"><span class="letter">B</span><h3 style="margin:0" data-i18n="tb.h">Singapore legal entity</h3></div><span class="prio p1" data-i18n="prio.1">Priority 1</span></header>
+        <dl>
+          <dt data-i18n="lbl.auth">Authority</dt><dd>ACRA</dd>
+          <dt data-i18n="lbl.why">Why</dt><dd data-i18n="tb.why">CSA funding support is limited to Singapore-registered businesses. The entity structure also decides which licensing rules apply, so it should be designed together with track A.</dd>
+        </dl>
+        <ul>
+          <li data-i18n="tb.l1">Decide the Singapore role: operating company, R&amp;D/technology subsidiary, or partner</li>
+          <li data-i18n="tb.l2">Decide which entity holds MST treasury, staking reward wallet, bridge relayer and HSM keys</li>
+        </ul>
+      </article>
+
+      <article class="track">
+        <header><div style="display:flex;gap:12px;align-items:center"><span class="letter">C</span><h3 style="margin:0" data-i18n="tc.h">CSA Cyber Essentials → Cyber Trust mark</h3></div><span class="prio p1" data-i18n="prio.1">Priority 1</span></header>
+        <dl>
+          <dt data-i18n="lbl.auth">Authority</dt><dd data-i18n="tc.auth">Cyber Security Agency of Singapore (CSA)</dd>
+          <dt data-i18n="lbl.std">Standard</dt><dd data-i18n="tc.std">Cyber Trust (2025) = Singapore Standard SS 712:2025</dd>
+          <dt data-i18n="lbl.term">Validity</dt><dd data-i18n="tc.term">Cyber Trust: 3 years with annual audits · Cyber Essentials: 2 years</dd>
+          <dt data-i18n="lbl.why">Why</dt><dd data-i18n="tc.why">Singapore’s national cybersecurity certification, also recognised outside Singapore. Since April 2025 it covers cloud and AI security — relevant to our cloud HSM and AI-model registration service.</dd>
+        </dl>
+        <ul>
+          <li data-i18n="tc.l1">Complete the CSA self-assessment template against the controls in section 4</li>
+          <li data-i18n="tc.l2">Add independent penetration test and written incident-response plan</li>
+          <li data-i18n="tc.l3">Engage a CSA-appointed certification body</li>
+        </ul>
+      </article>
+
+      <article class="track">
+        <header><div style="display:flex;gap:12px;align-items:center"><span class="letter">D</span><h3 style="margin:0" data-i18n="td.h">IMDA Data Protection Trustmark (DPTM)</h3></div><span class="prio p2" data-i18n="prio.2">Priority 2</span></header>
+        <dl>
+          <dt data-i18n="lbl.auth">Authority</dt><dd data-i18n="td.auth">IMDA · PDPC</dd>
+          <dt data-i18n="lbl.std">Standard</dt><dd>SS 714:2025</dd>
+          <dt data-i18n="lbl.why">Why</dt><dd data-i18n="td.why">Voluntary, enterprise-wide certification of PDPA-compliant data handling, audited by IMDA-appointed certification bodies with annual surveillance audits. Applies because we collect account, contact and company data.</dd>
+        </dl>
+        <ul>
+          <li data-i18n="td.l1">Keep personal data off-chain; store only hashes and CIDs on MST</li>
+          <li data-i18n="td.l2">Appoint a Data Protection Officer; publish English privacy policy and terms aligned with the PDPA</li>
+          <li data-i18n="td.l3">Document data retention and disposal periods</li>
+        </ul>
+      </article>
+
+      <article class="track">
+        <header><div style="display:flex;gap:12px;align-items:center"><span class="letter">E</span><h3 style="margin:0" data-i18n="te.h">IMDA TradeTrust / OpenAttestation</h3></div><span class="prio p2" data-i18n="prio.2">Priority 2</span></header>
+        <dl>
+          <dt data-i18n="lbl.auth">Authority</dt><dd data-i18n="te.auth">IMDA · GovTech (open-source framework)</dd>
+          <dt data-i18n="lbl.type">Type</dt><dd data-i18n="te.type">Framework alignment — not a certificate</dd>
+          <dt data-i18n="lbl.why">Why</dt><dd data-i18n="te.why">TradeTrust is IMDA’s framework for verifiable documents, built on OpenAttestation and W3C Verifiable Credentials, with issuer identity resolved via DNS-TXT records. Our SBT credentials and RWA records are natural candidates.</dd>
+        </dl>
+        <ul>
+          <li data-i18n="te.l1">Export SBT and RWA records as OpenAttestation-format documents</li>
+          <li data-i18n="te.l2">Publish a DNS-TXT issuer record on mustsem.co.kr</li>
+          <li data-i18n="te.l3">Build a custom verifier for chain 7601, or anchor document hashes to a public chain supported by standard verifiers</li>
+        </ul>
+      </article>
+
+      <article class="track">
+        <header><div style="display:flex;gap:12px;align-items:center"><span class="letter">F</span><h3 style="margin:0" data-i18n="tf.h">Independent smart-contract &amp; bridge audit</h3></div><span class="prio p1" data-i18n="prio.1">Priority 1</span></header>
+        <dl>
+          <dt data-i18n="lbl.auth">Authority</dt><dd data-i18n="tf.auth">Reputable third-party auditor</dd>
+          <dt data-i18n="lbl.why">Why</dt><dd data-i18n="tf.why">Not a government scheme, but MAS counsel, certification bodies and partners will expect public audit reports. Bridges and staking contracts hold user funds and are the highest-risk components.</dd>
+        </dl>
+        <ul>
+          <li data-i18n="tf.l1">Audit wMST, Staking, Bridge, SBT and RWA contracts and the relay process</li>
+          <li data-i18n="tf.l2">Verify published source code against deployed bytecode</li>
+          <li data-i18n="tf.l3">Publish the reports on this page</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- 6 READINESS -->
+  <section id="readiness">
+    <h2 data-i18n="rd.h">6. Readiness checklist</h2>
+    <p class="sub" data-i18n="rd.sub">What is in place and what an auditor or regulator will ask for first. Items marked “To do” should be closed before engaging a certification body.</p>
+    <div class="check">
+      <div class="grp" data-i18n="rd.g1">Network</div>
+      <div class="row"><div><h4 data-i18n="rd.n1h">MST mainnet live</h4><p data-i18n="rd.n1p">Chain 7601 running with wMST, Staking, SBT and RWA contracts deployed.</p></div><span class="badge b-ok" data-i18n="st.ok">Done</span></div>
+      <div class="row"><div><h4 data-i18n="rd.n2h">Publish consensus and validator set</h4><p data-i18n="rd.n2p">Document the consensus mechanism, number and location of validators, and who operates them.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.n3h">Public block explorer</h4><p data-i18n="rd.n3p">Let auditors and users independently check transactions and contracts.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.n4h">Independent throughput benchmark</h4><p data-i18n="rd.n4p">Back the 10,000 TPS figure with a reproducible test report.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.n5h">Availability, backup and disaster recovery</h4><p data-i18n="rd.n5p">Uptime targets, node backups and a tested recovery procedure.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+
+      <div class="grp" data-i18n="rd.g2">Security</div>
+      <div class="row"><div><h4 data-i18n="rd.s1h">Encryption, Vault and HSM architecture</h4><p data-i18n="rd.s1p">AES-256-GCM, Vault Transit, HSM-only signing, TLS 1.3, RBAC and hash-chain audit logs.</p></div><span class="badge b-ok" data-i18n="st.ok">Done</span></div>
+      <div class="row"><div><h4 data-i18n="rd.s2h">HSM validation status</h4><p data-i18n="rd.s2p">The site cites FIPS 140-2. FIPS 140-2 validations moved to the historical list in September 2026; confirm the HSM’s certificate number and its FIPS 140-3 status.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.s3h">Key rotation and retention policy</h4><p data-i18n="rd.s3p">Define rotation schedules and log/data retention periods in writing.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.s4h">Penetration test and incident response</h4><p data-i18n="rd.s4p">Third-party penetration test plus a documented incident-response plan.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.s5h">Bridge relayer design</h4><p data-i18n="rd.s5p">Document the relayer set, signing thresholds, lock/mint model, limits and pause controls.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+
+      <div class="grp" data-i18n="rd.g3">Products &amp; API</div>
+      <div class="row"><div><h4 data-i18n="rd.p1h">REST API and dashboard</h4><p data-i18n="rd.p1p">OpenAPI 3.1 specification with NFT, SBT and RWA mint endpoints.</p></div><span class="badge b-ok" data-i18n="st.ok">Done</span></div>
+      <div class="row"><div><h4 data-i18n="rd.p2h">Production API endpoint</h4><p data-i18n="rd.p2p">The guide shows an example base URL; publish the final production endpoint and versioning policy.</p></div><span class="badge b-wip" data-i18n="st.wip">In progress</span></div>
+      <div class="row"><div><h4 data-i18n="rd.p3h">IPFS AI-model registration</h4><p data-i18n="rd.p3p">In pilot; define verification endpoint and key handling before general release.</p></div><span class="badge b-wip" data-i18n="st.wip">In progress</span></div>
+      <div class="row"><div><h4 data-i18n="rd.p4h">SBT revocation and verification</h4><p data-i18n="rd.p4p">Specify how credentials are revoked and how third parties verify them.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.p5h">OpenAttestation export</h4><p data-i18n="rd.p5p">Generate verifiable documents from SBT and RWA records for track E.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+
+      <div class="grp" data-i18n="rd.g4">Governance &amp; legal</div>
+      <div class="row"><div><h4 data-i18n="rd.d1h">Token documentation</h4><p data-i18n="rd.d1p">English whitepaper covering MST supply, distribution, collateral model (1:1000), staking rewards and treasury.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.d2h">Legal classification of MST and tokenised assets</h4><p data-i18n="rd.d2p">Singapore legal opinion under the Payment Services Act, SFA and FSMA.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.d3h">Security policies mapped to SS 712:2025</h4><p data-i18n="rd.d3p">Written policy set covering the Cyber Trust requirements.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+      <div class="row"><div><h4 data-i18n="rd.d4h">English terms and privacy policy</h4><p data-i18n="rd.d4p">Align existing terms and privacy policy with Singapore PDPA.</p></div><span class="badge b-todo" data-i18n="st.todo">To do</span></div>
+    </div>
+  </section>
+
+  <!-- 7 ROADMAP -->
+  <section id="roadmap">
+    <h2 data-i18n="rm.h">7. Roadmap</h2>
+    <p class="sub" data-i18n="rm.sub">Indicative timeline. Dates depend on legal review and certification-body availability.</p>
+    <div class="road">
+      <div class="phase"><div class="when" data-i18n="rm.p1w">Phase 1 · Nov – Dec 2026</div><h3 data-i18n="rm.p1h">Legal clarity and documentation</h3>
+        <ul><li data-i18n="rm.p1l1">Engage Singapore counsel for MST / wMST / RWA classification</li><li data-i18n="rm.p1l2">Publish consensus, validator set, explorer and English whitepaper</li><li data-i18n="rm.p1l3">Confirm HSM validation status</li></ul></div>
+      <div class="phase"><div class="when" data-i18n="rm.p2w">Phase 2 · Q1 2027</div><h3 data-i18n="rm.p2h">Entity and assurance</h3>
+        <ul><li data-i18n="rm.p2l1">Singapore entity set-up aligned with the legal opinion</li><li data-i18n="rm.p2l2">Smart-contract and bridge audit; penetration test</li><li data-i18n="rm.p2l3">Policy set mapped to SS 712:2025 and PDPA</li></ul></div>
+      <div class="phase"><div class="when" data-i18n="rm.p3w">Phase 3 · Q2 2027</div><h3 data-i18n="rm.p3h">Certification</h3>
+        <ul><li data-i18n="rm.p3l1">CSA Cyber Essentials, then Cyber Trust audit</li><li data-i18n="rm.p3l2">DPTM application</li><li data-i18n="rm.p3l3">OpenAttestation-compatible SBT and RWA documents</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 8 DOCUMENTS -->
+  <section id="documents">
+    <h2 data-i18n="doc.h">8. Documents to prepare</h2>
+    <p class="sub" data-i18n="doc.sub">All in English, kept in one evidence folder.</p>
+    <ul class="docs">
+      <li data-i18n="doc.l1">Company profile and Singapore entity documents</li>
+      <li data-i18n="doc.l2">MST whitepaper and tokenomics</li>
+      <li data-i18n="doc.l3">Network architecture: consensus, validators, nodes</li>
+      <li data-i18n="doc.l4">Security architecture: Vault, HSM, encryption, RBAC</li>
+      <li data-i18n="doc.l5">HSM certificate and key-management policy</li>
+      <li data-i18n="doc.l6">Smart-contract and bridge audit reports</li>
+      <li data-i18n="doc.l7">Penetration test report</li>
+      <li data-i18n="doc.l8">Incident response and business continuity plan</li>
+      <li data-i18n="doc.l9">Personal data inventory, privacy policy and terms</li>
+      <li data-i18n="doc.l10">Legal opinion on token classification</li>
+      <li data-i18n="doc.l11">API specification (OpenAPI 3.1)</li>
+      <li data-i18n="doc.l12">CSA self-assessment template (completed)</li>
+    </ul>
+  </section>
+
+  <div class="callout warn" style="margin:8px 0 32px">
+    <p style="margin:0" data-i18n="disc"><strong>Disclaimer:</strong> This page is a planning document, not legal advice. Requirements, fees and funding change; confirm details with CSA, IMDA, MAS and a Singapore-qualified lawyer before applying.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong data-i18n="src.h">Official sources</strong>
+    <ol>
+      <li><a href="https://www.csa.gov.sg/our-programmes/support-for-enterprises/sg-cyber-safe-programme/cybersecurity-certification-for-organisations/cyber-trust/certification-for-the-cyber-trust-mark/">CSA — Certification for the Cyber Trust mark</a></li>
+      <li><a href="https://www.imda.gov.sg/dptm">IMDA — Data Protection Trustmark Certification</a></li>
+      <li><a href="https://www.mas.gov.sg/news/media-releases/2025/mas-clarifies-regulatory-regime-for-digital-token-service-providers">MAS — Regulatory regime for digital token service providers</a></li>
+      <li><a href="https://github.com/TradeTrust">TradeTrust (GitHub)</a> · <a href="https://www.openattestation.com/">OpenAttestation</a></li>
+      <li><a href="https://www.mustsem.co.kr/">MUSTSEM Network</a></li>
+    </ol>
+    <p>© 2026 MUSTSEM Network</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- Korean translations (English in the HTML is the source of truth) ---------- */
+const KO = {
+  "hero.eyebrow":"싱가포르 인증 준비",
+  "hero.title":"MST 네트워크 — 플랫폼 기능 및 싱가포르 인증 계획",
+  "hero.lead":"머스트셈(MST) 네트워크가 현재 제공하는 기능, 추진할 싱가포르 국가 인증·규제 인정, 그리고 신청 전에 준비해야 할 사항을 한곳에 정리한 문서입니다.",
+  "hero.owner":"담당: 머스트셈 (MUSTSEM)",
+  "hero.updated":"최종 수정: 2026년 10월 22일",
+  "hero.status":"상태: 메인넷 운영 중 · 인증 준비 단계",
+  "stat.chain":"체인 ID","stat.evm":"완전 호환","stat.tps":"공지된 목표 처리량","stat.24h":"전용 네트워크 구축",
+  "nav.summary":"요약","nav.network":"네트워크","nav.features":"기능","nav.security":"보안","nav.tracks":"인증 트랙","nav.readiness":"준비 체크리스트","nav.roadmap":"로드맵","nav.documents":"준비 서류",
+
+  "sum.h":"1. 요약",
+  "sum.sub":"목표는 MST 네트워크가 싱가포르에서 공신력 있는 국가 단위 인정을 받는 것입니다. MST는 머스트셈이 기업 전용 네트워크를 발급하고, 자산을 브릿지하고, NFT·SBT·실물자산을 토큰화하는 기반 체인입니다.",
+  "sum.callout":"<strong>중요:</strong> 싱가포르에는 체인 하나에 발급하는 단일 ‘블록체인 인증서’가 없습니다. 국가 단위 인정은 정부 인증 제도를 여러 겹 쌓아 만듭니다. 사이버보안청(CSA)의 보안 인증, IMDA의 개인정보 보호 인증, IMDA TradeTrust / OpenAttestation 검증 문서 프레임워크 호환, 그리고 MST에 가장 중요한 것으로 MST·wMST·토큰화 자산의 법적 성격에 대한 싱가포르 통화청(MAS) 기준의 명확한 정리입니다.",
+  "sum.c1t":"규제","sum.c1h":"MAS 입장 정리","sum.c1p":"MST는 담보로 예치되고, 보상을 받으며 스테이킹되고, 브릿지됩니다. 법적 성격에 대한 싱가포르 법률 의견서가 가장 먼저입니다.",
+  "sum.c2t":"보안","sum.c2h":"CSA 사이버 트러스트 마크","sum.c2p":"국가 사이버보안 인증(SS 712:2025). 기존 Vault / HSM / AES-256-GCM 구조가 좋은 출발점입니다.",
+  "sum.c3t":"데이터","sum.c3h":"IMDA DPTM","sum.c3p":"개인정보 보호 트러스트마크(SS 714:2025). 회원가입, 대시보드, 상담 신청 양식을 운영하므로 해당됩니다.",
+  "sum.c4t":"호환성","sum.c4h":"TradeTrust 호환","sum.c4p":"SBT 자격증명과 RWA 기록을 싱가포르 OpenAttestation 형식으로 검증 가능하게 만듭니다.",
+
+  "net.h":"2. 네트워크 개요","net.sub":"MST가 메인 체인이며, 기업 전용 네트워크는 MST 담보를 기반으로 그 위에 발급됩니다.",
+  "net.name":"네트워크 이름","net.symbol":"네이티브 코인","net.vm":"실행 환경","net.vmv":"EVM 완전 호환",
+  "net.tps":"처리량","net.tpsv":"초당 10,000건 (공지 기준, 네트워크 구성에 따라 다름)",
+  "net.cons":"합의 방식·검증 노드","net.consv":"공개 예정 (준비 체크리스트 참고)",
+  "net.api":"API","net.apiv":"REST, OpenAPI 3.1 명세, <code>x-api-key</code> 인증","net.web":"웹사이트",
+  "net.child":"머스트셈 인프라에서 운영 중인 네트워크",
+  "col.net":"네트워크","col.sym":"심볼","col.role":"역할",
+  "role.main":"메인 체인 · 인증 대상","role.ded":"전용 네트워크","role.ded2":"전용 네트워크","role.bridge":"전용 네트워크 · MST와 브릿지 연결","role.nd":"전용 네트워크 · 미배포",
+
+  "feat.h":"3. 플랫폼 기능","feat.sub":"현재 MST 네트워크에서 제공하는 서비스입니다.",
+  "feat.t.infra":"인프라","feat.t.infra2":"인프라","feat.t.infra3":"인프라","feat.t.tok":"토큰화","feat.t.tok2":"토큰화","feat.t.tok3":"토큰화","feat.t.prot":"보호","feat.t.dev":"개발자",
+  "feat.f1h":"기업 전용 네트워크","feat.f1p":"기업마다 자체 운영 정책을 가진 독립된 EVM 호환 체인을 제공합니다. 예치한 MST를 담보로 잠그고 1:1000 비율로 네이티브 코인을 발행하며, 무담보 발행은 없고 운영 기간 중 담보를 줄일 수 없습니다. 요청 시 거버넌스 토큰을 추가 발행할 수 있습니다. 승인 후 24시간 이내 구축을 목표로 합니다.",
+  "feat.f2h":"브릿지","feat.f2p":"네트워크 간 자산을 이동합니다. 현재는 JKK-TMZ의 TMZ를 1:1로 wTMZ로 래핑한 뒤, 릴레이가 MST 체인의 같은 주소로 wMST를 전달합니다.",
+  "feat.f3h":"스테이킹","feat.f3p":"MST를 1:1로 wMST로 래핑합니다. 스테이킹한 wMST는 연 2%의 MST 보상을 받으며, 7일마다 수령할 수 있고 잠금 기간은 없습니다.",
+  "feat.f4h":"NFT","feat.f4p":"API(<code>POST /v1/nfts/mint</code>)로 디지털 자산을 발행하고 소유권을 관리합니다.",
+  "feat.f5h":"SBT (영혼 귀속 토큰)","feat.f5p":"받은 지갑에 영구 귀속되어 옮길 수 없는 자격증명으로, 가디언 주소 1개를 지정합니다. 증명서·자격 발급에 적합합니다.",
+  "feat.f6h":"RWA (실물자산)","feat.f6p":"실물자산 원본 파일(이미지, PDF)을 IPFS에 저장하고, 생성된 CID를 받는 사람 지갑의 온체인 토큰에 기록합니다.",
+  "feat.f7h":"AI 모델 IPFS 보안 등록","feat.f7p":"AI 모델 파일을 AES-256으로 암호화해 IPFS에 저장하고 CID를 체인에 시점 기록해, 무단 수정을 탐지하고 버전을 복원할 수 있습니다. 접근은 API 키 단위로 통제합니다. 현재 파일럿 운영 중입니다.",
+  "feat.f8h":"REST API·대시보드","feat.f8p":"API 호출로 토큰 발행과 스마트컨트랙트 실행을 합니다(OpenAPI 3.1). 모든 응답에 온체인 증거인 <code>transactionHash</code>가 담기며, 처리 상태와 로그는 대시보드에서 확인합니다.",
+
+  "sec.h":"4. 보안 구조","sec.sub":"이미 갖춘 통제 항목입니다. 사이버 트러스트와 DPTM 요구사항에 그대로 대응됩니다.",
+  "sec.c1h":"암호화","sec.c1p":"민감 데이터는 IPFS 저장분을 포함해 AES-256-GCM 암호문으로만 저장합니다.",
+  "sec.c2h":"키 관리","sec.c2p":"HashiCorp Vault가 키 생성·보관·교체를 맡고, 서버는 평문 키를 보관하지 않습니다. 암호화는 Vault Transit API로 처리합니다.",
+  "sec.c3h":"HSM 서명","sec.c3p":"트랜잭션 서명은 HSM(PKCS#11, CloudHSM) 안에서만 이뤄지며 개인키는 밖으로 나가지 않습니다.",
+  "sec.c4h":"전송·요청 보안","sec.c4p":"TLS 1.3, HMAC·JWT 요청 인증, 멱등성 키, HMAC-SHA256 서명 웹훅.",
+  "sec.c5h":"접근 통제","sec.c5p":"최소 권한 원칙에 따른 역할 기반 접근(운영자, 개발자, 검증자).",
+  "sec.c6h":"감사·모니터링","sec.c6p":"모든 요청, 서명, 결과를 위변조 확인이 가능한 해시 체인으로 WORM 또는 S3-SSE 저장소에 기록하고 24시간 모니터링합니다. 데이터 주권 요구에 맞춘 온프레미스 Vault/HSM 옵션도 있습니다.",
+
+  "trk.h":"5. 인증·인정 트랙","trk.sub":"각 트랙은 독립적으로 진행됩니다. 우선순위는 법적 위험, 공신력 효과, 다른 트랙을 여는 정도를 기준으로 했습니다.",
+  "prio.1":"우선순위 1","prio.2":"우선순위 2",
+  "lbl.auth":"기관","lbl.why":"이유","lbl.law":"법령","lbl.std":"표준","lbl.term":"유효기간","lbl.type":"성격",
+  "ta.h":"MAS 규제 입장","ta.auth":"싱가포르 통화청(MAS)",
+  "ta.law":"지급서비스법 2019 · 증권선물법(SFA) · 금융서비스시장법(FSMA) 2022 제9부 (2025년 6월 30일 시행)",
+  "ta.why":"MST는 담보로 잠기고, 래핑·브릿지되며, 연 2% 수익을 위해 스테이킹됩니다. 규제 당국이 디지털 결제 토큰 여부를 판단할 때 보는 특징들입니다. 싱가포르 기반 기업이 디지털 토큰 서비스를 제공하면 해외 고객만 상대해도 라이선스가 필요하며, MAS는 이런 해외 전용 라이선스를 대체로 내주지 않겠다고 밝혔습니다. RWA 토큰은 자본시장 상품에 해당할 수도 있습니다.",
+  "ta.l1":"MST, wMST, 기업 네이티브 코인, NFT, SBT, RWA 토큰의 법적 성격에 대한 싱가포르 법률 의견서 확보",
+  "ta.l2":"스테이킹 보상과 브릿지를 싱가포르에서 또는 싱가포르로부터, 누구에게 제공할 수 있는지 검토",
+  "ta.l3":"RWA 범위 정의 (자산 기록인지, 소유·투자 권리인지)",
+  "ta.l4":"라이선스가 필요하다면 MAS 핀테크 규제 샌드박스 검토",
+  "tb.h":"싱가포르 법인",
+  "tb.why":"CSA 인증 비용 지원은 싱가포르 등록 기업만 받을 수 있습니다. 법인 구조에 따라 적용되는 라이선스 규정도 달라지므로 트랙 A와 함께 설계해야 합니다.",
+  "tb.l1":"싱가포르 법인의 역할 결정: 운영 법인, R&amp;D·기술 자회사, 또는 파트너",
+  "tb.l2":"MST 재무, 스테이킹 보상 지갑, 브릿지 릴레이어, HSM 키를 어느 법인이 보유할지 결정",
+  "tc.h":"CSA 사이버 에센셜 → 사이버 트러스트 마크","tc.auth":"싱가포르 사이버보안청(CSA)","tc.std":"Cyber Trust (2025) = 싱가포르 표준 SS 712:2025",
+  "tc.term":"사이버 트러스트: 3년, 매년 감사 · 사이버 에센셜: 2년",
+  "tc.why":"싱가포르의 국가 사이버보안 인증이며 싱가포르 밖에서도 인정됩니다. 2025년 4월부터 클라우드·AI 보안까지 범위가 넓어져, 클라우드 HSM과 AI 모델 등록 서비스와도 관련이 있습니다.",
+  "tc.l1":"4장의 통제 항목을 기준으로 CSA 자가진단 양식 작성","tc.l2":"외부 모의해킹과 문서화된 사고 대응 계획 추가","tc.l3":"CSA 지정 인증기관에 심사 의뢰",
+  "td.h":"IMDA 개인정보 보호 트러스트마크(DPTM)","td.auth":"IMDA · 개인정보보호위원회(PDPC)",
+  "td.why":"PDPA를 준수하는 데이터 처리를 기업 전체 단위로 인증하는 자율 제도로, IMDA 지정 인증기관이 심사하고 매년 사후 심사를 합니다. 계정·연락처·회사 정보를 수집하므로 해당됩니다.",
+  "td.l1":"개인정보는 체인 밖에 두고, MST에는 해시와 CID만 저장","td.l2":"개인정보 보호책임자(DPO) 지정, PDPA에 맞춘 영문 개인정보처리방침·이용약관 게시","td.l3":"데이터 보관·파기 기간 문서화",
+  "te.h":"IMDA TradeTrust / OpenAttestation","te.auth":"IMDA · GovTech (오픈소스 프레임워크)","te.type":"프레임워크 호환 — 인증서 아님",
+  "te.why":"TradeTrust는 OpenAttestation과 W3C 검증 가능 자격증명(VC)을 기반으로 한 IMDA의 검증 문서 프레임워크로, 발급자 신원은 DNS-TXT 레코드로 확인합니다. MST의 SBT 자격증명과 RWA 기록이 적용하기 좋은 대상입니다.",
+  "te.l1":"SBT·RWA 기록을 OpenAttestation 형식 문서로 내보내기","te.l2":"mustsem.co.kr에 DNS-TXT 발급자 레코드 등록","te.l3":"체인 7601 전용 검증기를 만들거나, 표준 검증기가 지원하는 퍼블릭 체인에 문서 해시를 앵커링",
+  "tf.h":"독립 스마트컨트랙트·브릿지 감사","tf.auth":"공신력 있는 외부 감사기관",
+  "tf.why":"정부 제도는 아니지만, MAS 관련 법률 자문, 인증기관, 파트너가 공개 감사 보고서를 요구할 것입니다. 브릿지와 스테이킹 컨트랙트는 이용자 자산을 보관하므로 위험도가 가장 높습니다.",
+  "tf.l1":"wMST, Staking, Bridge, SBT, RWA 컨트랙트와 릴레이 절차 감사","tf.l2":"공개 소스 코드와 배포된 바이트코드 일치 검증","tf.l3":"감사 보고서를 이 페이지에 게시",
+
+  "rd.h":"6. 준비 체크리스트","rd.sub":"이미 갖춘 것과, 심사기관·규제기관이 가장 먼저 요구할 것입니다. ‘미착수’ 항목은 인증기관 의뢰 전에 해결해야 합니다.",
+  "rd.g1":"네트워크","rd.g2":"보안","rd.g3":"제품·API","rd.g4":"거버넌스·법무",
+  "st.ok":"완료","st.wip":"진행 중","st.todo":"미착수",
+  "rd.n1h":"MST 메인넷 운영","rd.n1p":"체인 7601 운영 중, wMST·Staking·SBT·RWA 컨트랙트 배포 완료.",
+  "rd.n2h":"합의 방식·검증 노드 공개","rd.n2p":"합의 방식, 검증 노드 수와 위치, 운영 주체를 문서화합니다.",
+  "rd.n3h":"공개 블록 익스플로러","rd.n3p":"감사자와 이용자가 트랜잭션과 컨트랙트를 직접 확인할 수 있게 합니다.",
+  "rd.n4h":"처리량 외부 벤치마크","rd.n4p":"초당 10,000건 수치를 재현 가능한 테스트 보고서로 뒷받침합니다.",
+  "rd.n5h":"가용성·백업·재해 복구","rd.n5p":"가동률 목표, 노드 백업, 실제로 검증한 복구 절차.",
+  "rd.s1h":"암호화·Vault·HSM 구조","rd.s1p":"AES-256-GCM, Vault Transit, HSM 내부 서명, TLS 1.3, RBAC, 해시 체인 감사 로그.",
+  "rd.s2h":"HSM 인증 상태 확인","rd.s2p":"사이트에는 FIPS 140-2로 표기되어 있습니다. FIPS 140-2 인증은 2026년 9월 과거 목록으로 이관되었으므로, HSM 인증서 번호와 FIPS 140-3 인증 여부를 확인해야 합니다.",
+  "rd.s3h":"키 교체·보관 정책","rd.s3p":"키 교체 주기와 로그·데이터 보관 기간을 문서로 정합니다.",
+  "rd.s4h":"모의해킹·사고 대응","rd.s4p":"외부 모의해킹과 문서화된 사고 대응 계획.",
+  "rd.s5h":"브릿지 릴레이어 설계","rd.s5p":"릴레이어 구성, 서명 임계값, 잠금·발행 방식, 한도, 일시정지 기능을 문서화합니다.",
+  "rd.p1h":"REST API·대시보드","rd.p1p":"NFT, SBT, RWA 발행 엔드포인트를 갖춘 OpenAPI 3.1 명세.",
+  "rd.p2h":"운영 API 엔드포인트","rd.p2p":"가이드에는 예시 주소만 있습니다. 최종 운영 엔드포인트와 버전 정책을 공개합니다.",
+  "rd.p3h":"AI 모델 IPFS 등록","rd.p3p":"파일럿 운영 중. 정식 출시 전에 검증 엔드포인트와 키 처리 방식을 정합니다.",
+  "rd.p4h":"SBT 폐기·검증 절차","rd.p4p":"자격증명 폐기 방법과 제3자 검증 방법을 명시합니다.",
+  "rd.p5h":"OpenAttestation 내보내기","rd.p5p":"트랙 E를 위해 SBT·RWA 기록에서 검증 가능 문서를 생성합니다.",
+  "rd.d1h":"토큰 문서","rd.d1p":"MST 발행량, 배분, 담보 모델(1:1000), 스테이킹 보상, 재무 구조를 담은 영문 백서.",
+  "rd.d2h":"MST·토큰화 자산 법적 성격 정리","rd.d2p":"지급서비스법·증권선물법·FSMA 기준 싱가포르 법률 의견서.",
+  "rd.d3h":"SS 712:2025 기준 보안 정책","rd.d3p":"사이버 트러스트 요구사항을 포괄하는 문서화된 정책 세트.",
+  "rd.d4h":"영문 이용약관·개인정보처리방침","rd.d4p":"기존 약관과 개인정보처리방침을 싱가포르 PDPA에 맞춥니다.",
+
+  "rm.h":"7. 로드맵","rm.sub":"예상 일정입니다. 법률 검토와 인증기관 일정에 따라 달라질 수 있습니다.",
+  "rm.p1w":"1단계 · 2026년 11월 – 12월","rm.p1h":"법적 명확성·문서화",
+  "rm.p1l1":"MST·wMST·RWA 성격 검토를 위한 싱가포르 법률 자문 착수","rm.p1l2":"합의 방식, 검증 노드, 익스플로러, 영문 백서 공개","rm.p1l3":"HSM 인증 상태 확인",
+  "rm.p2w":"2단계 · 2027년 1분기","rm.p2h":"법인·보증",
+  "rm.p2l1":"법률 의견에 맞춘 싱가포르 법인 설립","rm.p2l2":"스마트컨트랙트·브릿지 감사, 모의해킹","rm.p2l3":"SS 712:2025·PDPA 기준 정책 세트",
+  "rm.p3w":"3단계 · 2027년 2분기","rm.p3h":"인증",
+  "rm.p3l1":"CSA 사이버 에센셜, 이어서 사이버 트러스트 심사","rm.p3l2":"DPTM 신청","rm.p3l3":"OpenAttestation 호환 SBT·RWA 문서",
+
+  "doc.h":"8. 준비 서류","doc.sub":"모두 영문으로, 하나의 증빙 폴더에 보관합니다.",
+  "doc.l1":"회사 소개서 및 싱가포르 법인 서류","doc.l2":"MST 백서 및 토큰 이코노미","doc.l3":"네트워크 구조: 합의 방식, 검증 노드, 노드 구성","doc.l4":"보안 구조: Vault, HSM, 암호화, RBAC",
+  "doc.l5":"HSM 인증서 및 키 관리 정책","doc.l6":"스마트컨트랙트·브릿지 감사 보고서","doc.l7":"모의해킹 보고서","doc.l8":"사고 대응·업무 연속성 계획",
+  "doc.l9":"개인정보 목록, 개인정보처리방침, 이용약관","doc.l10":"토큰 성격에 대한 법률 의견서","doc.l11":"API 명세 (OpenAPI 3.1)","doc.l12":"CSA 자가진단 양식 (작성본)",
+
+  "disc":"<strong>안내:</strong> 이 페이지는 계획 문서이며 법률 자문이 아닙니다. 요건, 비용, 지원금은 바뀔 수 있으니 신청 전에 CSA, IMDA, MAS 및 싱가포르 자격 변호사에게 확인하세요.",
+  "src.h":"공식 출처"
+};
+
+/* ---------- i18n engine ---------- */
+(function(){
+  const nodes = Array.from(document.querySelectorAll('[data-i18n]'));
+  const EN = {};
+  nodes.forEach(n => { EN[n.dataset.i18n] = n.innerHTML; });
+  const titles = { en: document.title, ko: 'MST 싱가포르 인증 준비' };
+
+  function apply(lang){
+    const dict = lang === 'ko' ? KO : EN;
+    nodes.forEach(n => {
+      const k = n.dataset.i18n;
+      n.innerHTML = (dict[k] !== undefined) ? dict[k] : EN[k];   // fall back to English
+    });
+    document.documentElement.lang = lang;
+    document.title = titles[lang];
+    document.querySelectorAll('.lang button').forEach(b =>
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    try { localStorage.setItem('mst-lang', lang); } catch(e) {}
+    try {
+      const url = new URL(location.href);
+      url.searchParams.set('lang', lang);
+      history.replaceState(null, '', url);
+    } catch(e) {}
+  }
+
+  document.querySelectorAll('.lang button').forEach(b =>
+    b.addEventListener('click', () => apply(b.dataset.lang)));
+
+  // Priority: ?lang= → saved choice → English (source)
+  let initial = new URLSearchParams(location.search).get('lang');
+  if (!initial) { try { initial = localStorage.getItem('mst-lang'); } catch(e) {} }
+  apply(initial === 'ko' ? 'ko' : 'en');
+})();
+</script>
+</body>
+</html>
